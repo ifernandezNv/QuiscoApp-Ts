@@ -1,4 +1,4 @@
-interface Categoria {
+export interface Categoria {
     icono: string,
     nombre: string
 }

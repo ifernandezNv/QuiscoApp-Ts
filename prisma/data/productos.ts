@@ -1,4 +1,4 @@
-interface Producto {
+export interface Producto {
     nombre: string,
     precio: number
     imagen: string
@@ -362,5 +362,5 @@ const productos: Producto[] = [
 ]
 
 export {
-    productos 
+    productos
 }
