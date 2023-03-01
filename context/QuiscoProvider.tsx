@@ -1,4 +1,6 @@
 import {createContext, useState, useEffect, ReactNode} from 'react'
+import { Producto } from 'prisma/data/productos'
+import { Categoria } from 'prisma/data/categorias'
 
 interface QuiscoProps{
     children: ReactNode
@@ -16,7 +18,6 @@ function QuiscoProvider({children} : QuiscoProps){
         </QuiscoContext.Provider>
     )
 }
-
 export {
     QuiscoProvider
 }
