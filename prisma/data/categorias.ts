@@ -1,6 +1,7 @@
 export interface Categoria {
     icono: string,
     nombre: string
+    productos?: []
 }
 const categorias: Categoria[] = [
     {

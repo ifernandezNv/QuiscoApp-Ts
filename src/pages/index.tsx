@@ -1,11 +1,18 @@
+import {useEffect, useState} from 'react';
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Layout from '@/components/Layout'
+import { PrismaClient } from '@prisma/client'
+import useQuiosco from '../../hooks/useQuiosco'
 
 const inter = Inter({ subsets: ['latin'] })
+const prisma = new PrismaClient();
 
-export default function Home() {
+export default function Home({categoriasQuery}) {
+  const {categorias, setCategorias} = useQuiosco()
+  useEffect(()=>{
+    setCategorias(categoriasQuery)
+  },[])
   return (
     <>
       <Head>
@@ -24,4 +31,19 @@ export default function Home() {
       </Layout>
     </>
   )
+}
+
+export async function getServerSideProps(){
+  try {
+    await prisma.$connect()
+    const categoriasQuery = await prisma.categoria.findMany();
+    console.log(categoriasQuery);
+    return {
+      props: {
+        categoriasQuery
+      }
+    }
+  } catch (error) {
+    
+  }
 }
