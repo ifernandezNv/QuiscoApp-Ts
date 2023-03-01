@@ -18,7 +18,7 @@ function Layout({title, description, children} : LayoutProps) {
         </Head>
         <div className='flex flex-col md:flex-row gap-4 lg:gap-8'>
             <Sidebar/>
-            <main className='overflow-y-hidden'>
+            <main className='overflow-y-scroll w-full p-10'>
                 {children}
             </main>
         </div>

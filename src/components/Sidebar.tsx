@@ -12,7 +12,7 @@ function Sidebar() {
             width={300}
             height={300}
         />
-        <nav>
+        <nav className='w-full'>
             {categorias.map(categoria => <Categoria key={categoria.id} categoria = {categoria}/>)}
         </nav>
     </aside>

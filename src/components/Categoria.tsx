@@ -9,7 +9,7 @@ function Categoria({categoria} : Categoria) {
     const router = useRouter();
 
   return (
-    <div className={router.pathname === `/${icono}` ? 'bg-yellow-500 p-2 rounded' : 'p-2 rounded flex gap-4 items-center hover:bg-yellow-500 transition-all'} >
+    <div className={router.pathname === `/${icono}` ? 'bg-yellow-500 p-2 rounded w-full' : 'p-2 rounded flex gap-4 items-center hover:bg-yellow-500 transition-all w-full'} >
       <Image
         alt={`Imagen de la categoria ${nombre}`}
         width={50}
