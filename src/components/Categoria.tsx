@@ -1,12 +1,26 @@
 import React from 'react'
 import Link from 'next/link'
-import useQuiosco from 'hooks/useQuiosco'
-function Categoria() {
-    
+import Image from 'next/image'
+import {Categoria} from 'prisma/data/categorias'
+import { useRouter } from 'next/router'
+
+function Categoria({categoria} : Categoria) {
+    const {id, nombre, icono, productos} = categoria
+    const router = useRouter();
+
   return (
-    <Link href='si'>
-        
-    </Link>
+    <div className={router.pathname === `/${icono}` ? 'bg-yellow-500 p-2 rounded' : 'p-2 rounded flex gap-4 items-center hover:bg-yellow-500 transition-all'} >
+      <Image
+        alt={`Imagen de la categoria ${nombre}`}
+        width={50}
+        height={50}
+        src={`/assets/img/icono_${icono}.svg`}
+      />
+      <Link href='si' className='font-semibold '>
+          {nombre}
+      </Link>
+    </div>
+    
   )
 }
 

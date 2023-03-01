@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import Categoria from './Categoria'
-import {Categoria as CategoriaType} from 'prisma/data/categorias';
 import useQuiosco from 'hooks/useQuiosco'
 function Sidebar() {
   const {categorias} = useQuiosco();
