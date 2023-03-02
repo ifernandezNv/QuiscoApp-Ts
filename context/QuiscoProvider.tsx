@@ -12,13 +12,16 @@ function QuiscoProvider({children} : QuiscoProps){
     
     const [categorias, setCategorias] = useState<Categoria[]>([]);
     const [productos, setProductos] = useState<Producto[]>([]);
+    const [filtro, setFiltro] = useState('cafe');
     return (
         <QuiscoContext.Provider 
             value={{
                 productos,
                 setProductos,
                 categorias,
-                setCategorias
+                setCategorias,
+                filtro,
+                setFiltro,
             }}
         >
             {children}
