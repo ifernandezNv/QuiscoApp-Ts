@@ -2,13 +2,20 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import useQuiosco from 'hooks/useQuiosco'
 
 function Categoria({categoria}) {
     const {id, nombre, icono, productos} = categoria
     const router = useRouter();
+    const {setCategoriaSeleccionada} = useQuiosco();
     
+    function cambiarCategoria(e) : void{
+      setCategoriaSeleccionada(e.target.textContent)
+    }
+
   return (
-    <Link href={`/${icono}`} className={router.asPath === `/${icono}` ? 'bg-yellow-500 p-2 rounded w-full flex gap-4 items-center justify-center my-2' :  'w-full p-2 rounded flex gap-4 items-center justify-center hover:bg-yellow-500 transition-all my-2'} >
+    <Link href={`/${icono}`} onClick={ e => cambiarCategoria(e)} 
+      className={`${router.asPath === `/${icono}` ? 'bg-yellow-500' : 'hover:bg-yellow-500 transition-all'} p-2 border-b rounded w-full flex gap-4 items-center justify-center my-2`} >
       <Image
         alt={`Imagen de la categoria ${nombre}`}
         width={50}

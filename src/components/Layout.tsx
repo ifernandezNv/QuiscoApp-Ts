@@ -15,6 +15,7 @@ function Layout({title, description, children} : LayoutProps) {
             <title>QuiscoApp - {title}</title>
             <meta name='description' content={description}/>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className='flex flex-col md:flex-row gap-4 lg:gap-8'>
             <Sidebar/>

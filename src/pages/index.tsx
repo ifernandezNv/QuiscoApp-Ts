@@ -1,8 +1,6 @@
-import {useEffect, useState} from 'react';
-import Head from 'next/head'
+import {useEffect, useState} from 'react'
 import { Inter } from 'next/font/google'
 import Layout from '@/components/Layout'
-import { PrismaClient } from '@prisma/client'
 import useQuiosco from '../../hooks/useQuiosco'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -12,13 +10,9 @@ export default function Home({categoriasData}) {
   useEffect(()=>{
     setCategorias(categoriasData)
   },[])
+  console.log(categorias);
   return (
     <>
-      <Head>
-        <title>QuiscoApp - Home</title>
-
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Layout
         title='Inicio'
         description = 'QuiscoApp es una paltaforma que permite al negocio N levantar pedidos de manera dinámica y eficiente'
@@ -41,6 +35,6 @@ export async function getServerSideProps(){
       }
     }
   } catch (error) {
-    
+    console.log(error);
   }
 }
