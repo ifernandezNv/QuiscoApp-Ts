@@ -1,10 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import {Categoria} from 'prisma/data/categorias'
 import { useRouter } from 'next/router'
 
-function Categoria({categoria} : Categoria) {
+function Categoria({categoria}) {
     const {id, nombre, icono, productos} = categoria
     const router = useRouter();
     

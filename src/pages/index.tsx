@@ -6,12 +6,11 @@ import { PrismaClient } from '@prisma/client'
 import useQuiosco from '../../hooks/useQuiosco'
 
 const inter = Inter({ subsets: ['latin'] })
-const prisma = new PrismaClient();
 
-export default function Home({categoriasQuery}) {
+export default function Home({categoriasData}) {
   const {categorias, setCategorias} = useQuiosco()
   useEffect(()=>{
-    setCategorias(categoriasQuery)
+    setCategorias(categoriasData)
   },[])
   return (
     <>
@@ -34,12 +33,11 @@ export default function Home({categoriasQuery}) {
 
 export async function getServerSideProps(){
   try {
-    await prisma.$connect()
-    const categoriasQuery = await prisma.categoria.findMany();
-    console.log(categoriasQuery);
+    const categoriasQuery = await fetch(`${process.env.API_URL}/categorias`)
+    const categoriasData = await categoriasQuery.json();
     return {
       props: {
-        categoriasQuery
+        categoriasData
       }
     }
   } catch (error) {
