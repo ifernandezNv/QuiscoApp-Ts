@@ -1,7 +1,7 @@
 import {createContext, useState, useEffect, ReactNode} from 'react'
 import { Producto } from 'prisma/data/productos'
 import { Categoria } from 'prisma/data/categorias'
-
+import { useRouter } from 'next/router'
 interface QuiscoProps{
     children: ReactNode
 }
@@ -16,21 +16,20 @@ const QuiscoContext = createContext({})
 
 function QuiscoProvider({children} : QuiscoProps){
     
-    const [categorias, setCategorias] = useState<Categoria[]>([]);
-    const [productos, setProductos] = useState<Producto[]>([]);
-    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(0);
-    
+    const [categorias, setCategorias] = useState<Categoria[]>([])
+    const [productos, setProductos] = useState<Producto[]>([])
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(0)
+    const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({id: 0, nombre: '', productos: []})
+    const router = useRouter()
     useEffect(()=>{
         if(categoriaSeleccionada != 0){
             getInfoCategoria()
         }
     },[categoriaSeleccionada])
 
-    async function getCategorias(){
-        console.log(`${process.env.NEXT_PUBLIC_API_URL}/categorias`);
-        
+    async function getCategorias(){        
         try {
-          const categoriasQuery = await fetch(`${process.env.API_URL}/categorias`)
+          const categoriasQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categorias`)
           const categoriasData = await categoriasQuery.json();
           setCategorias(categoriasData);
         } catch (error) {
@@ -42,7 +41,8 @@ function QuiscoProvider({children} : QuiscoProps){
         try {
           const categoriaQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categoria?id=${Number(categoriaSeleccionada)}`);
           const categoriaData = await categoriaQuery.json()
-          console.log(categoriaData);
+          setCategoriaInfo(categoriaData[0])          
+          setProductos(categoriaData[0].productos)
         } catch (error) {
           console.log(error);
         }
@@ -58,7 +58,8 @@ function QuiscoProvider({children} : QuiscoProps){
                 categoriaSeleccionada,
                 setCategoriaSeleccionada,
                 getCategorias,
-                getInfoCategoria
+                getInfoCategoria,
+                categoriaInfo
             }}
         >
             {children}
