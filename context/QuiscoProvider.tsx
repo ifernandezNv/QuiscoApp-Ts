@@ -6,15 +6,39 @@ interface QuiscoProps{
     children: ReactNode
 }
 
+interface TCategoria {
+    id: number
+    nombre: string
+    productos: Producto[]
+}
+
 const QuiscoContext = createContext({})
 
 function QuiscoProvider({children} : QuiscoProps){
     
     const [categorias, setCategorias] = useState<Categoria[]>([]);
     const [productos, setProductos] = useState<Producto[]>([]);
-    const [filtro, setFiltro] = useState('cafe');
-    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<string>('');
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<TCategoria>({id: 0, nombre: '', productos: []});
     
+    async function getCategorias(){
+        try {
+          const categoriasQuery = await fetch(`${process.env.API_URL}/categorias`)
+          const categoriasData = await categoriasQuery.json();
+          setCategorias(categoriasData);
+        } catch (error) {
+          console.log(error);
+        }
+    }
+    
+    async function getInfoCategoria(){
+        try {
+          const data = await fetch(`${process.env.API_URL}/categoria`);
+          
+        } catch (error) {
+          console.log(error);
+        }
+    }
+
     return (
         <QuiscoContext.Provider 
             value={{
@@ -22,10 +46,10 @@ function QuiscoProvider({children} : QuiscoProps){
                 setProductos,
                 categorias,
                 setCategorias,
-                filtro,
-                setFiltro,
                 categoriaSeleccionada,
-                setCategoriaSeleccionada
+                setCategoriaSeleccionada,
+                getCategorias,
+                getInfoCategoria
             }}
         >
             {children}

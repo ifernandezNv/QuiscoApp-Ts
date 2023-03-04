@@ -2,15 +2,18 @@ import {useEffect, useState} from 'react'
 import { Inter } from 'next/font/google'
 import Layout from '@/components/Layout'
 import useQuiosco from '../../hooks/useQuiosco'
-
+import { useRouter } from 'next/router'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({categoriasData}) {
   const {categorias, setCategorias} = useQuiosco()
+  const router = useRouter();
+  
   useEffect(()=>{
     setCategorias(categoriasData)
+    router.push('/cafe')
   },[])
-  console.log(categorias);
+
   return (
     <>
       <Layout
