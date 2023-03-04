@@ -4,10 +4,10 @@ import {Categoria} from 'prisma/data/categorias';
 const prisma = new PrismaClient();
 
 export default async function handler( req: NextApiRequest, res: NextApiResponse<Categoria[]>) {
-    const {icono} = req.query
+    const {id} = req.query
     
     const categoriaQuery = await prisma.categoria.findMany({
-        where: {icono: icono},
+        where: {id : Number(id)},
         include: {
             productos: true
         }

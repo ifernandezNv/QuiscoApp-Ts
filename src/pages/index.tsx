@@ -11,7 +11,6 @@ export default function Home({categoriasData}) {
   
   useEffect(()=>{
     setCategorias(categoriasData)
-    router.push('/cafe')
   },[])
 
   return (
@@ -30,7 +29,7 @@ export default function Home({categoriasData}) {
 
 export async function getServerSideProps(){
   try {
-    const categoriasQuery = await fetch(`${process.env.API_URL}/categorias`)
+    const categoriasQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categorias`)
     const categoriasData = await categoriasQuery.json();
     return {
       props: {

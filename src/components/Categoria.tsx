@@ -10,9 +10,9 @@ function Categoria({categoria}) {
     
     const router = useRouter();
     
-    // function cambiarCategoria(id: number) : void{
-      
-    // }
+    function cambiarCategoria(id: number) : void{
+      setCategoriaSeleccionada(id);
+    }
 
   return (
     <Link href={`/${icono}`} onClick={ () => cambiarCategoria(id)} 
