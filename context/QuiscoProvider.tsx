@@ -20,6 +20,8 @@ function QuiscoProvider({children} : QuiscoProps){
     const [productos, setProductos] = useState<Producto[]>([])
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(0)
     const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({id: 0, nombre: '', productos: []})
+    const [verModal, setVerModal] = useState<boolean>(false);
+
     const router = useRouter()
     useEffect(()=>{
         if(categoriaSeleccionada != 0){
@@ -51,7 +53,9 @@ function QuiscoProvider({children} : QuiscoProps){
           console.log(error);
         }
     }
-
+    function esconderModal(){
+        setVerModal(!verModal);
+    }
     return (
         <QuiscoContext.Provider 
             value={{
@@ -63,7 +67,9 @@ function QuiscoProvider({children} : QuiscoProps){
                 setCategoriaSeleccionada,
                 getCategorias,
                 getInfoCategoria,
-                categoriaInfo
+                categoriaInfo,
+                verModal,
+                esconderModal
             }}
         >
             {children}

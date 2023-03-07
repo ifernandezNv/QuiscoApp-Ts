@@ -11,7 +11,7 @@ function Sidebar() {
 
 
   return (
-    <aside className='w-full overflow-hidden h-screen bg-white md:w-2/5 py-10 px-4 flex flex-col gap-4 items-center justify-center'>
+    <aside className='w-full overflow-hidden h-screen bg-white md:w-1/3 py-10 px-4 flex flex-col gap-4 items-center justify-center'>
         <Image
             alt='Logo de QuiscoApp'
             src={'/assets/img/logo.svg'}
