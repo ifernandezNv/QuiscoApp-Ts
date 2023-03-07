@@ -2,7 +2,7 @@ import React from 'react'
 import Sidebar from './Sidebar'
 import Head from 'next/head'
 import { ReactNode } from 'react'
-
+import ProgressBar from './ProgressBar'
 interface LayoutProps {
     title: string,
     description: string
@@ -20,6 +20,7 @@ function Layout({title, description, children} : LayoutProps) {
         <div className='flex flex-col md:flex-row gap-4 lg:gap-8'>
             <Sidebar/>
             <main className='h-screen overflow-y-scroll w-full p-10'>
+                <ProgressBar/>
                 {children}
             </main>
         </div>
