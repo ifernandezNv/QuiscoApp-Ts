@@ -24,6 +24,7 @@ function QuiscoProvider({children} : QuiscoProps){
     const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({id: 0, nombre: '', productos: []})
     const [verModal, setVerModal] = useState<boolean>(false)
     const [cantidad, setCantidad] = useState<number>(0)
+    const [cargando, setCargando] = useState<boolean>(false)
     const router = useRouter()
     useEffect(()=>{
         if(categoriaSeleccionada != 0){
@@ -39,7 +40,8 @@ function QuiscoProvider({children} : QuiscoProps){
         getCategorias()
     },[])
 
-    async function getCategorias(){        
+    async function getCategorias(){   
+        setCargando(true)     
         try {
           const categoriasQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categorias`)
           const categoriasData = await categoriasQuery.json()
@@ -48,9 +50,11 @@ function QuiscoProvider({children} : QuiscoProps){
         } catch (error) {
           console.log(error)
         }
+        setCargando(false)
     }
 
     async function getInfoCategoria(){
+        setCargando(true)
         try {
           const categoriaQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categoria?id=${Number(categoriaSeleccionada)}`)
           const categoriaData = await categoriaQuery.json()
@@ -59,9 +63,11 @@ function QuiscoProvider({children} : QuiscoProps){
         } catch (error) {
           console.log(error)
         }
+        setCargando(false)
     }
     
     async function getInfoProducto(){
+        setCargando(true)
         try {
             const productoQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/producto?id=${Number(productoBuscar)}`)
             const productoData = await productoQuery.json()
@@ -70,6 +76,7 @@ function QuiscoProvider({children} : QuiscoProps){
             console.log(error)
             
         }
+        setCargando(false)
     }
 
     function esconderModal(){
@@ -107,7 +114,9 @@ function QuiscoProvider({children} : QuiscoProps){
                 esconderModal,
                 cantidad,
                 aumentarCantidad,
-                disminuirCantidad
+                disminuirCantidad,
+                cargando, 
+                setCargando
             }}
         >
             {children}
