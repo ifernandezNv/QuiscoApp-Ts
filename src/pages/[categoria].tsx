@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import Layout from '@/components/Layout'
 import { useRouter } from 'next/router'
 import useQuiosco from 'hooks/useQuiosco';
-
+import Producto from '@/components/Producto';
 function Categoria() {
-    const {categoriaInfo, categorias, setCategorias, productos, setProductos, getCategorias} = useQuiosco()
+    const {categoriaInfo, productos, getCategorias} = useQuiosco()
     
     const router = useRouter();
 
@@ -22,6 +22,9 @@ function Categoria() {
       <h1 className='font-bold text-4xl my-2'>{categoriaInfo?.nombre}</h1>
       <p>Comienza seleccionando los productos que deseas</p>
       <p>Espera un momento y disfruta tu comida</p>
+      <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4 my-5'>
+        {productos?.map(producto => <Producto key={producto.id} producto={producto}/>)}
+      </div>
     </Layout>
   )
 }

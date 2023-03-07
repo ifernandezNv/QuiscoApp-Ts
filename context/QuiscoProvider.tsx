@@ -26,12 +26,16 @@ function QuiscoProvider({children} : QuiscoProps){
             getInfoCategoria()
         }
     },[categoriaSeleccionada])
+    useEffect(()=>{
+        console.log(productos);
+    },[productos])
 
     async function getCategorias(){        
         try {
           const categoriasQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categorias`)
           const categoriasData = await categoriasQuery.json();
           setCategorias(categoriasData);
+          router.push('/cafe')
         } catch (error) {
           console.log(error);
         }
