@@ -3,8 +3,9 @@ import Layout from '@/components/Layout'
 import { useRouter } from 'next/router'
 import useQuiosco from 'hooks/useQuiosco';
 import Producto from '@/components/Producto';
+import Modal from '@/components/Modal';
 function Categoria() {
-    const {categoriaInfo, productos, getCategorias} = useQuiosco()
+    const {categoriaInfo, productos, getCategorias, verModal} = useQuiosco()
     
     const router = useRouter();
 
@@ -25,6 +26,10 @@ function Categoria() {
       <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4 my-5'>
         {productos?.map(producto => <Producto key={producto.id} producto={producto}/>)}
       </div>
+      {verModal && 
+        <Modal
+        />
+      }
     </Layout>
   )
 }
