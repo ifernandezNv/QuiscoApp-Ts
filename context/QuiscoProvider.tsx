@@ -18,6 +18,8 @@ function QuiscoProvider({children} : QuiscoProps){
     
     const [categorias, setCategorias] = useState<Categoria[]>([])
     const [productos, setProductos] = useState<Producto[]>([])
+    const [producto, setProducto] = useState<Producto>({nombre: '', precio: 0, imagen: '', categoriaId: 0})
+    const [productoBuscar, setProductoBuscar] = useState<number>(0)
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(0)
     const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({id: 0, nombre: '', productos: []})
     const [verModal, setVerModal] = useState<boolean>(false);
@@ -28,9 +30,6 @@ function QuiscoProvider({children} : QuiscoProps){
             getInfoCategoria()
         }
     },[categoriaSeleccionada])
-    useEffect(()=>{
-        console.log(productos);
-    },[productos])
 
     async function getCategorias(){        
         try {
@@ -53,6 +52,18 @@ function QuiscoProvider({children} : QuiscoProps){
           console.log(error);
         }
     }
+    
+    async function getInfoProducto(){
+        try {
+            const productoQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/producto?id=${Number(productoBuscar)}`);
+            const productoData = await productoQuery.json();
+            setProductos(productoData[0]);
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+
     function esconderModal(){
         setVerModal(!verModal);
     }
@@ -61,12 +72,17 @@ function QuiscoProvider({children} : QuiscoProps){
             value={{
                 productos,
                 setProductos,
+                producto,
+                setProducto,
+                productoBuscar,
+                setProductoBuscar,
                 categorias,
                 setCategorias,
                 categoriaSeleccionada,
                 setCategoriaSeleccionada,
                 getCategorias,
                 getInfoCategoria,
+                getInfoProducto,
                 categoriaInfo,
                 verModal,
                 esconderModal

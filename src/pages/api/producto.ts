@@ -5,9 +5,9 @@ const prisma = new PrismaClient();
 
 export default async function handler( req: NextApiRequest, res: NextApiResponse<Producto[]>) {
     const {id} = req.query
-    
     const productoQuery = await prisma.producto.findMany({
         where: {id : Number(id)},
     });
+    
     res.status(200).json(productoQuery)
 }
