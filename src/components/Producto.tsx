@@ -19,7 +19,7 @@ function Producto({producto}) {
             <button type='submit' onClick={()=> {
               esconderModal()
               setProductoBuscar(id)
-              getInfoProducto()
+              // getInfoProducto()
             }} className='w-full bg-indigo-700 hover:bg-indigo-900 text-center text-white font-bold p-2 mt-5 rounded transition-all'>Añadir al Pedido</button>
         </div>
     </div>

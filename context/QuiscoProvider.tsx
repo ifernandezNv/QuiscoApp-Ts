@@ -22,8 +22,8 @@ function QuiscoProvider({children} : QuiscoProps){
     const [productoBuscar, setProductoBuscar] = useState<number>(0)
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(0)
     const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({id: 0, nombre: '', productos: []})
-    const [verModal, setVerModal] = useState<boolean>(false);
-
+    const [verModal, setVerModal] = useState<boolean>(false)
+    const [cantidad, setCantidad] = useState<number>(0)
     const router = useRouter()
     useEffect(()=>{
         if(categoriaSeleccionada != 0){
@@ -31,41 +31,60 @@ function QuiscoProvider({children} : QuiscoProps){
         }
     },[categoriaSeleccionada])
 
+    useEffect(()=>{
+        getInfoProducto()
+    },[productoBuscar])
+    
+    useEffect(()=>{
+        getCategorias()
+    },[])
+
     async function getCategorias(){        
         try {
           const categoriasQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categorias`)
-          const categoriasData = await categoriasQuery.json();
-          setCategorias(categoriasData);
+          const categoriasData = await categoriasQuery.json()
+          setCategorias(categoriasData)
           router.push('/cafe')
         } catch (error) {
-          console.log(error);
+          console.log(error)
         }
     }
 
     async function getInfoCategoria(){
         try {
-          const categoriaQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categoria?id=${Number(categoriaSeleccionada)}`);
+          const categoriaQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categoria?id=${Number(categoriaSeleccionada)}`)
           const categoriaData = await categoriaQuery.json()
           setCategoriaInfo(categoriaData[0])          
           setProductos(categoriaData[0].productos)
         } catch (error) {
-          console.log(error);
+          console.log(error)
         }
     }
     
     async function getInfoProducto(){
         try {
-            const productoQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/producto?id=${Number(productoBuscar)}`);
-            const productoData = await productoQuery.json();
-            setProductos(productoData[0]);
+            const productoQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/producto?id=${Number(productoBuscar)}`)
+            const productoData = await productoQuery.json()
+            setProducto(productoData[0])
         } catch (error) {
-            console.log(error);
+            console.log(error)
             
         }
     }
 
     function esconderModal(){
-        setVerModal(!verModal);
+        setVerModal(!verModal)
+    }
+
+    function aumentarCantidad(){
+        if(cantidad < 10){
+            setCantidad(cantidad +1)
+        }
+    }
+    function disminuirCantidad(){
+        if(cantidad >0){
+            setCantidad(cantidad-1)
+        }
     }
     return (
         <QuiscoContext.Provider 
@@ -85,7 +104,10 @@ function QuiscoProvider({children} : QuiscoProps){
                 getInfoProducto,
                 categoriaInfo,
                 verModal,
-                esconderModal
+                esconderModal,
+                cantidad,
+                aumentarCantidad,
+                disminuirCantidad
             }}
         >
             {children}
