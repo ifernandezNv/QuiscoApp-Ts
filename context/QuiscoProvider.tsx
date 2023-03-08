@@ -35,7 +35,8 @@ function QuiscoProvider({children} : QuiscoProps){
     const [cantidad, setCantidad] = useState<number>(0)
     const [cargando, setCargando] = useState<boolean>(false)
     const [progreso, setProgreso] = useState<string>(InitialValue)
-    const [orden, setOrden] = useState<TOrden[]>([])
+    const [orden, setOrden] = useState<TOrden>({id: 0, pedido: [], fecha: '', total: 0, nombre: ''})
+    const [ordenes, setOrdenes] = useState<TOrden[]>([])
     
     const router = useRouter()
 
