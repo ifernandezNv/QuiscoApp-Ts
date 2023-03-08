@@ -25,6 +25,7 @@ function QuiscoProvider({children} : QuiscoProps){
     const [verModal, setVerModal] = useState<boolean>(false)
     const [cantidad, setCantidad] = useState<number>(0)
     const [cargando, setCargando] = useState<boolean>(false)
+    const [progreso, setProgreso] = useState<number>(1)
     const router = useRouter()
     useEffect(()=>{
         if(categoriaSeleccionada != 0){
@@ -93,6 +94,7 @@ function QuiscoProvider({children} : QuiscoProps){
             setCantidad(cantidad-1)
         }
     }
+    
     return (
         <QuiscoContext.Provider 
             value={{
