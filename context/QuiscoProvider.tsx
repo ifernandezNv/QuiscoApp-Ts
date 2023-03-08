@@ -14,7 +14,7 @@ interface TCategoria {
 
 interface TOrden {
     id: number
-    pedido: []
+    pedido: unknown
     fecha: string
     total: number
     nombre: string
