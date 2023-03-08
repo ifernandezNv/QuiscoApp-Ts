@@ -12,6 +12,13 @@ interface TCategoria {
     productos: Producto[]
 }
 
+interface TOrden {
+    id: number
+    pedido: []
+    fecha: string
+    total: number
+    nombre: string
+}
 const InitialValue : 'menu' | 'resumen' | 'total' = 'menu';
 
 const QuiscoContext = createContext({})
@@ -28,6 +35,8 @@ function QuiscoProvider({children} : QuiscoProps){
     const [cantidad, setCantidad] = useState<number>(0)
     const [cargando, setCargando] = useState<boolean>(false)
     const [progreso, setProgreso] = useState<string>(InitialValue)
+    const [orden, setOrden] = useState<TOrden[]>([])
+    
     const router = useRouter()
 
     useEffect(()=>{
