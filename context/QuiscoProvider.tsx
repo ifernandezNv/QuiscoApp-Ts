@@ -12,6 +12,8 @@ interface TCategoria {
     productos: Producto[]
 }
 
+const progresoURL : 'menu' | 'resumen' | 'total' = 'menu';
+
 const QuiscoContext = createContext({})
 
 function QuiscoProvider({children} : QuiscoProps){
@@ -25,7 +27,7 @@ function QuiscoProvider({children} : QuiscoProps){
     const [verModal, setVerModal] = useState<boolean>(false)
     const [cantidad, setCantidad] = useState<number>(0)
     const [cargando, setCargando] = useState<boolean>(false)
-    const [progreso, setProgreso] = useState<number>(1)
+    const [progreso, setProgreso] = useState<string>(progresoURL)
     const router = useRouter()
     useEffect(()=>{
         if(categoriaSeleccionada != 0){
@@ -40,6 +42,14 @@ function QuiscoProvider({children} : QuiscoProps){
     useEffect(()=>{
         getCategorias()
     },[])
+    useEffect(()=>{
+        const url = router.asPath.split('/');
+        if(url[1] === 'menu' || url[1] === 'resumen' || url[1] === 'datos'){
+            setProgreso(url[1])
+        }
+        console.log(progreso);
+        
+    },[router])
 
     async function getCategorias(){   
         setCargando(true)     
