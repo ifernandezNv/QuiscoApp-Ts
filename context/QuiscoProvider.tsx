@@ -2,6 +2,12 @@ import {createContext, useState, useEffect, ReactNode} from 'react'
 import { Producto } from 'prisma/data/productos'
 import { Categoria } from 'prisma/data/categorias'
 import { useRouter } from 'next/router'
+/*
+    Porcentajes de la barra de progreso
+    Menu = 16.6667% (w-1/6)
+    Resumen: 66.6667% (w-4/6)
+    Datos y Total: 100% (w-full)
+*/
 interface QuiscoProps{
     children: ReactNode
 }
@@ -19,7 +25,7 @@ interface TOrden {
     total: number
     nombre: string
 }
-const InitialValue : 'menu' | 'resumen' | 'total' = 'menu';
+const InitialValue : '1/6' | '4/6' | 'full' = '1/6'
 
 const QuiscoContext = createContext({})
 
@@ -53,13 +59,20 @@ function QuiscoProvider({children} : QuiscoProps){
     useEffect(()=>{
         getCategorias()
     },[])
+
     useEffect(()=>{
-        const url = router.asPath.split('/');
-        if(url[1] === 'menu' || url[1] === 'resumen' || url[1] === 'datos'){
-            setProgreso(url[1])
+        const url = router.asPath.split('/')
+        switch(url[1]){
+            case 'resumen':
+                setProgreso('4/6')
+                break
+            case 'datos':
+                setProgreso('full')
+                break
+            default:
+                setProgreso('1/6')
+                break
         }
-        console.log(progreso);
-        
     },[router])
 
     async function getCategorias(){   
@@ -139,7 +152,9 @@ function QuiscoProvider({children} : QuiscoProps){
                 aumentarCantidad,
                 disminuirCantidad,
                 cargando, 
-                setCargando
+                setCargando,
+                progreso,
+                
             }}
         >
             {children}
