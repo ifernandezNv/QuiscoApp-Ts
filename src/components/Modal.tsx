@@ -7,7 +7,9 @@ function Modal() {
   return (
     <div className='block fixed z-index-1 left-0 top-0 w-full h-screen bg-black bg-opacity-50'>
         <div className='fixed left-1/3 top-1/4 bg-white rounded shadow p-3 w-2/5'>
-            <p onClick={() => esconderModal()} className='justify-right font-bold text-xl text-right py-1 px-3 cursor-pointer'>&times;</p>
+          <div className='flex justify-end'>
+            <button type='button' onClick={() => esconderModal()} className='flex justify-end font-bold text-xl -mt-3 py-1 px-3 cursor-pointer'>&times;</button>
+          </div>
             {cargando ? 'Cargando...' : (
               <div className='flex gap-3 items-center p-4'>
                 <Image
@@ -17,7 +19,7 @@ function Modal() {
                   alt={`Imagen producto ${producto?.nombre}`}
                   className='rounded'
                 />
-                <div className=''>
+                <div>
                   <p className='font-bold text-xl'>{producto?.nombre}</p>
                   <p className='text-amber-500 font-black text-4xl my-1'>{formatearDinero(producto?.precio)}</p>
                   <p>Cantidad:</p>
