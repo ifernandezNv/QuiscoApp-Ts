@@ -18,6 +18,7 @@ function Categoria() {
     >
       {cargando ? 'Cargando...' : (
         <>
+          <div className='w-1/6 hidden'></div>
           <h1 className='font-bold text-4xl my-2'>{categoriaInfo?.nombre}</h1>
           <p>Comienza seleccionando los productos que deseas</p>
           <p>Espera un momento y disfruta tu comida</p>
