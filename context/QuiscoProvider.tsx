@@ -66,6 +66,10 @@ function QuiscoProvider({children} : QuiscoProps){
     },[])
 
     useEffect(()=>{
+        getOrdenes()
+    },[])
+
+    useEffect(()=>{
         const url = router.asPath.split('/')
         switch(url[1]){
             case 'resumen':
@@ -80,16 +84,13 @@ function QuiscoProvider({children} : QuiscoProps){
         }
     },[router])
 
-    useEffect(()=>{
-        console.log(orden);
-    },[orden])
-
     function eliminarAlerta(): void{
         setTimeout(() => {
             setAlerta({mensaje: '', tipo: ''})    
         }, 3000);
     }
-    async function getCategorias(): void{   
+
+    async function getCategorias(){   
         setCargando(true)     
         try {
           const categoriasQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categorias`)
@@ -102,6 +103,17 @@ function QuiscoProvider({children} : QuiscoProps){
         setCargando(false)
     }
 
+    async function getOrdenes(){   
+        setCargando(true)     
+        try {
+          const ordenesQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ordenes`)
+          const ordenesData = await ordenesQuery.json()
+          setOrdenes(ordenesData)
+        } catch (error) {
+          console.log(error)
+        }
+        setCargando(false)
+    }
     async function getInfoCategoria(){
         setCargando(true)
         try {
