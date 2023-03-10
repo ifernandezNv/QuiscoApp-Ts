@@ -3,6 +3,7 @@ export interface Producto {
     precio: number
     imagen: string
     categoriaId: number
+    cantidad?: number
 }
 const productos: Producto[] = [
     {

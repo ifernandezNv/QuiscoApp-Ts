@@ -33,7 +33,7 @@ function QuiscoProvider({children} : QuiscoProps){
     
     const [categorias, setCategorias] = useState<Categoria[]>([])
     const [productos, setProductos] = useState<Producto[]>([])
-    const [producto, setProducto] = useState<Producto>({nombre: '', precio: 0, imagen: '', categoriaId: 0})
+    const [producto, setProducto] = useState<Producto>({nombre: '', precio: 0, imagen: '', categoriaId: 0, cantidad: 0})
     const [productoBuscar, setProductoBuscar] = useState<number>(0)
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(0)
     const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({id: 0, nombre: '', productos: []})
@@ -118,7 +118,10 @@ function QuiscoProvider({children} : QuiscoProps){
 
     }
     function eliminarProducto(id){
-        const productosFiltrados = id
+        const copiaOrden = orden
+        const productosFiltrados = orden.pedido.filter(producto => producto.id !== id)
+        copiaOrden.pedido = productosFiltrados;
+        setOrden(copiaOrden)
     }
 
     function esconderModal(){
@@ -161,7 +164,8 @@ function QuiscoProvider({children} : QuiscoProps){
                 cargando, 
                 setCargando,
                 progreso,
-                
+                eliminarProducto,
+                agregarProductoPedido
             }}
         >
             {children}
