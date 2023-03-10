@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-function ProductoState({producto}) {
+function ProductoCarrito({producto}) {
     const {nombre, precio, cantidad, id, imagen} = producto
   return (
     <div className='flex gap-5'>
@@ -12,7 +12,8 @@ function ProductoState({producto}) {
             src={`/assets/img/${imagen}.jpg`}
         />
         <div className=''>
-
+          <p>{nombre}</p>
+          <p>{cantidad}</p>
         </div>
         <div>
             <button type='button' className='bg-amber-500 p-2 my-3 text-center text-white font-semibold rounded'>Editar</button>
@@ -22,4 +23,4 @@ function ProductoState({producto}) {
   )
 }
 
-export default ProductoState
+export default ProductoCarrito

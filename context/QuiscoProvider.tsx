@@ -209,6 +209,7 @@ function QuiscoProvider({children} : QuiscoProps){
                 categoriaSeleccionada,
                 setCategoriaSeleccionada,
                 ordenes,
+                orden,
                 getCategorias,
                 getInfoCategoria,
                 getInfoProducto,
