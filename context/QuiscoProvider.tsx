@@ -127,6 +127,7 @@ function QuiscoProvider({children} : QuiscoProps){
         }
         setCargando(false)
     }
+
     function agregarProductoPedido(producto: {}): void{
         if(producto.cantidad === 0){
             setAlerta({mensaje: 'Cantidad no válida', tipo: 'error'});
@@ -139,13 +140,22 @@ function QuiscoProvider({children} : QuiscoProps){
             const productosFiltrado = productosCopia.map( productoState => productoState.id === producto.id ? producto : productoState)
             ordenCopia.pedido = productosFiltrado
             setOrden(ordenCopia)
+            setAlerta({mensaje: 'Producto agregado correctamente', tipo: 'success'})
+            setTimeout(() => {
+                esconderModal()    
+            }, 3000);
+            
             return
         }
         productosCopia.push(producto);
         ordenCopia.pedido = productosCopia
         setOrden(ordenCopia)
-        
+        setAlerta({mensaje: 'Producto agregado correctamente', tipo: 'success'})
+        setTimeout(() => {
+            esconderModal()    
+        }, 3000);
     }
+
     function eliminarProducto(id: number): void{
         const copiaOrden = orden
         const productosFiltrados = orden.pedido.filter(producto => producto.id !== id)
@@ -196,6 +206,7 @@ function QuiscoProvider({children} : QuiscoProps){
                 progreso,
                 eliminarProducto,
                 agregarProductoPedido,
+                alerta,
                 eliminarAlerta
             }}
         >
