@@ -21,7 +21,7 @@ interface TCategoria {
 interface TOrden {
     id?: number
     pedido: unknown
-    fecha: string
+    fecha: Date
     total: number
     nombre: string
 }
@@ -45,7 +45,7 @@ function QuiscoProvider({children} : QuiscoProps){
     const [cantidad, setCantidad] = useState<number>(0)
     const [cargando, setCargando] = useState<boolean>(false)
     const [progreso, setProgreso] = useState<string>(InitialValue)
-    const [orden, setOrden] = useState<TOrden>({pedido: [], fecha: '', total: 0, nombre: ''})
+    const [orden, setOrden] = useState<TOrden>({pedido: [], fecha: new Date(), total: 0, nombre: ''})
     const [ordenes, setOrdenes] = useState<TOrden[]>([])
     const [alerta, setAlerta] = useState<TAlerta>({mensaje: '', tipo: ''})
 

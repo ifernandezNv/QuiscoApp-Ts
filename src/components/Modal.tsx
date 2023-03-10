@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import useQuiosco from 'hooks/useQuiosco'
 import Image from 'next/image'
-import {formatearDinero} from 'helpers'
+import {formatearDinero} from 'helpers/index.ts'
 import Alerta from './Alerta'
 function Modal() {
     const {esconderModal, producto, cantidad, aumentarCantidad, disminuirCantidad, cargando, agregarProductoPedido, alerta} = useQuiosco()

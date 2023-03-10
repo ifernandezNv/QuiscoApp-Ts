@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import {formatearDinero} from '/helpers'
+import {formatearDinero} from 'helpers'
 import useQuiosco from 'hooks/useQuiosco'
 function Producto({producto}) {
     const {nombre, precio, imagen, id} = producto
