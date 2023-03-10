@@ -47,7 +47,7 @@ function QuiscoProvider({children} : QuiscoProps){
     const [progreso, setProgreso] = useState<string>(InitialValue)
     const [orden, setOrden] = useState<TOrden>({id: 0, pedido: [], fecha: '', total: 0, nombre: ''})
     const [ordenes, setOrdenes] = useState<TOrden[]>([])
-    const [alerta, setAlerta] = useState<TAlerta>({mensaje: '', tipo: ''});
+    const [alerta, setAlerta] = useState<TAlerta>({mensaje: '', tipo: ''})
 
     const router = useRouter()
 
@@ -87,7 +87,7 @@ function QuiscoProvider({children} : QuiscoProps){
     function eliminarAlerta(): void{
         setTimeout(() => {
             setAlerta({mensaje: '', tipo: ''})    
-        }, 3000);
+        }, 3000)
     }
 
     async function getCategorias(){   
@@ -142,11 +142,11 @@ function QuiscoProvider({children} : QuiscoProps){
 
     function agregarProductoPedido(producto: {}): void{
         if(producto.cantidad === 0){
-            setAlerta({mensaje: 'Cantidad no válida', tipo: 'error'});
+            setAlerta({mensaje: 'Cantidad no válida', tipo: 'error'})
             return 
         }
-        const ordenCopia = orden;
-        const productosCopia = orden.pedido;
+        const ordenCopia = orden
+        const productosCopia = orden.pedido
         const productoRepetido = productosCopia.find(productoState => productoState.id === producto.id)
         if(productoRepetido){
             const productosFiltrado = productosCopia.map( productoState => productoState.id === producto.id ? producto : productoState)
@@ -154,23 +154,23 @@ function QuiscoProvider({children} : QuiscoProps){
             setOrden(ordenCopia)
             setAlerta({mensaje: 'Producto agregado correctamente', tipo: 'success'})
             setTimeout(() => {
-                esconderModal()    
-            }, 2000);
+                esconderModal()
+            }, 2000)
             return
         }
-        productosCopia.push(producto);
+        productosCopia.push(producto)
         ordenCopia.pedido = productosCopia
         setOrden(ordenCopia)
         setAlerta({mensaje: 'Producto agregado correctamente', tipo: 'success'})
         setTimeout(() => {
             esconderModal()    
-        }, 2000);
+        }, 2000)
     }
 
     function eliminarProducto(id: number): void{
         const copiaOrden = orden
         const productosFiltrados = orden.pedido.filter(producto => producto.id !== id)
-        copiaOrden.pedido = productosFiltrados;
+        copiaOrden.pedido = productosFiltrados
         setOrden(copiaOrden)
     }
 
@@ -203,9 +203,11 @@ function QuiscoProvider({children} : QuiscoProps){
                 setCategorias,
                 categoriaSeleccionada,
                 setCategoriaSeleccionada,
+                ordenes,
                 getCategorias,
                 getInfoCategoria,
                 getInfoProducto,
+                getOrdenes,
                 categoriaInfo,
                 verModal,
                 esconderModal,
