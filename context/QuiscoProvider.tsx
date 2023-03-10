@@ -114,10 +114,21 @@ function QuiscoProvider({children} : QuiscoProps){
         }
         setCargando(false)
     }
-    function agregarProductoPedido(){
-
+    function agregarProductoPedido(): void{
+        const ordenCopia = orden;
+        const productosCopia = orden.pedido;
+        const productoRepetido = productosCopia.find(productoState => productoState.id === producto.id)
+        if(productoRepetido){
+            const productosFiltrado = productosCopia.map( productoState => productoState.id === producto.id ? producto : productoState)
+            ordenCopia.pedido = productosFiltrado
+            setOrden(ordenCopia)
+            return; 
+        }
+        productosCopia.push(producto);
+        ordenCopia.pedido = productosCopia
+        setOrden(ordenCopia)
     }
-    function eliminarProducto(id){
+    function eliminarProducto(id: number): void{
         const copiaOrden = orden
         const productosFiltrados = orden.pedido.filter(producto => producto.id !== id)
         copiaOrden.pedido = productosFiltrados;
