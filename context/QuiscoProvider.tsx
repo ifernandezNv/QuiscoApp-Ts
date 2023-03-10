@@ -89,7 +89,7 @@ function QuiscoProvider({children} : QuiscoProps){
             setAlerta({mensaje: '', tipo: ''})    
         }, 3000);
     }
-    async function getCategorias(){   
+    async function getCategorias(): void{   
         setCargando(true)     
         try {
           const categoriasQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categorias`)
@@ -143,8 +143,7 @@ function QuiscoProvider({children} : QuiscoProps){
             setAlerta({mensaje: 'Producto agregado correctamente', tipo: 'success'})
             setTimeout(() => {
                 esconderModal()    
-            }, 3000);
-            
+            }, 2000);
             return
         }
         productosCopia.push(producto);
@@ -153,7 +152,7 @@ function QuiscoProvider({children} : QuiscoProps){
         setAlerta({mensaje: 'Producto agregado correctamente', tipo: 'success'})
         setTimeout(() => {
             esconderModal()    
-        }, 3000);
+        }, 2000);
     }
 
     function eliminarProducto(id: number): void{
@@ -163,17 +162,17 @@ function QuiscoProvider({children} : QuiscoProps){
         setOrden(copiaOrden)
     }
 
-    function esconderModal(){
+    function esconderModal(): void{
         setVerModal(!verModal)
         setCantidad(0)
     }
 
-    function aumentarCantidad(){
+    function aumentarCantidad(): void{
         if(cantidad < 10){
             setCantidad(cantidad +1)
         }
     }
-    function disminuirCantidad(){
+    function disminuirCantidad(): void{
         if(cantidad >0){
             setCantidad(cantidad-1)
         }
