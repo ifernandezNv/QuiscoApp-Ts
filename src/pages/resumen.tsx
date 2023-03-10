@@ -8,7 +8,8 @@ function resumen() {
         title={'Resumen'}
         description='Visualiza el progreso del pedido que haz realizado '
     >
-        <h1>Resumen</h1>
+        <h1 className='font-black text-4xl my-4'>Resumen</h1>
+        <p>Revisa tu pedido</p>
     </Layout>
   )
 }

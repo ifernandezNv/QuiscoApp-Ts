@@ -113,6 +113,12 @@ function QuiscoProvider({children} : QuiscoProps){
         }
         setCargando(false)
     }
+    function agregarProductoPedido(){
+
+    }
+    function eliminarProducto(id){
+        const productosFiltrados = id
+    }
 
     function esconderModal(){
         setVerModal(!verModal)
