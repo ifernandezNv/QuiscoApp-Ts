@@ -13,13 +13,13 @@ interface QuiscoProps{
 }
 
 interface TCategoria {
-    id: number
+    id?: number
     nombre: string
     productos: Producto[]
 }
 
 interface TOrden {
-    id: number
+    id?: number
     pedido: unknown
     fecha: string
     total: number
@@ -40,12 +40,12 @@ function QuiscoProvider({children} : QuiscoProps){
     const [producto, setProducto] = useState<Producto>({nombre: '', precio: 0, imagen: '', categoriaId: 0, cantidad: 0})
     const [productoBuscar, setProductoBuscar] = useState<number>(0)
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(0)
-    const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({id: 0, nombre: '', productos: []})
+    const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({nombre: '', productos: []})
     const [verModal, setVerModal] = useState<boolean>(false)
     const [cantidad, setCantidad] = useState<number>(0)
     const [cargando, setCargando] = useState<boolean>(false)
     const [progreso, setProgreso] = useState<string>(InitialValue)
-    const [orden, setOrden] = useState<TOrden>({id: 0, pedido: [], fecha: '', total: 0, nombre: ''})
+    const [orden, setOrden] = useState<TOrden>({pedido: [], fecha: '', total: 0, nombre: ''})
     const [ordenes, setOrdenes] = useState<TOrden[]>([])
     const [alerta, setAlerta] = useState<TAlerta>({mensaje: '', tipo: ''})
 
@@ -70,19 +70,10 @@ function QuiscoProvider({children} : QuiscoProps){
     },[])
 
     useEffect(()=>{
-        const url = router.asPath.split('/')
-        switch(url[1]){
-            case 'resumen':
-                setProgreso('2/3')
-                break
-            case 'datos':
-                setProgreso('full')
-                break
-            default:
-                setProgreso('1/6')
-                break
+        if(router?.pathname){
+            mostrarProgreso()
         }
-    },[router])
+    },[router.pathname])
 
     function eliminarAlerta(): void{
         setTimeout(() => {
@@ -190,6 +181,20 @@ function QuiscoProvider({children} : QuiscoProps){
         }
     }
     
+    function mostrarProgreso(): void{
+        switch(router.pathname){
+            case '/resumen':
+                setProgreso('2/3')
+                break;
+            case '/datos':
+                setProgreso('full')
+                break;
+            default:
+                setProgreso('1/6')
+                break;
+        }
+    }
+
     return (
         <QuiscoContext.Provider 
             value={{
