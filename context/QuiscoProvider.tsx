@@ -25,7 +25,7 @@ interface TOrden {
     total: number
     nombre: string
 }
-const InitialValue : '1/6' | '4/6' | 'full' = '1/6'
+const InitialValue : '1/6' | '2/3' | 'full' = '1/6'
 
 const QuiscoContext = createContext({})
 
@@ -64,7 +64,7 @@ function QuiscoProvider({children} : QuiscoProps){
         const url = router.asPath.split('/')
         switch(url[1]){
             case 'resumen':
-                setProgreso('4/6')
+                setProgreso('2/3')
                 break
             case 'datos':
                 setProgreso('full')
@@ -73,6 +73,7 @@ function QuiscoProvider({children} : QuiscoProps){
                 setProgreso('1/6')
                 break
         }
+        
     },[router])
 
     async function getCategorias(){   

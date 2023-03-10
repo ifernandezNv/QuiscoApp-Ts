@@ -9,7 +9,6 @@ function Categoria() {
     const router = useRouter()
     useEffect(()=>{
       getCategorias()
-      console.log(productos)
     },[])
 
   return (

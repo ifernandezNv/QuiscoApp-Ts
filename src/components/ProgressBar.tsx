@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import useQuiosco from 'hooks/useQuiosco'
 import Link from 'next/link'
 function ProgressBar() {
   const {progreso} = useQuiosco()
+  useEffect(()=>{
+    console.log(`w-${progreso}`);
+  },[progreso])
   return (
     <div className='mb-4 sticky'>
       <div className='pt-2 pb-3 flex justify-between'>

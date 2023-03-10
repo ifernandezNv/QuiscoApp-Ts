@@ -2,7 +2,7 @@ import React from 'react'
 import useQuiosco from 'hooks/useQuiosco'
 import Layout from '@/components/Layout'
 function resumen() {
-
+  
   return (
     <Layout
         title={'Resumen'}
