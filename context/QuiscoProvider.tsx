@@ -25,6 +25,10 @@ interface TOrden {
     total: number
     nombre: string
 }
+interface TAlerta {
+    mensaje: string
+    tipo: string
+}
 const InitialValue : '1/6' | '2/3' | 'full' = '1/6'
 
 const QuiscoContext = createContext({})
@@ -43,7 +47,8 @@ function QuiscoProvider({children} : QuiscoProps){
     const [progreso, setProgreso] = useState<string>(InitialValue)
     const [orden, setOrden] = useState<TOrden>({id: 0, pedido: [], fecha: '', total: 0, nombre: ''})
     const [ordenes, setOrdenes] = useState<TOrden[]>([])
-    
+    const [alerta, setAlerta] = useState<TAlerta>({mensaje: '', tipo: ''});
+
     const router = useRouter()
 
     useEffect(()=>{
@@ -73,9 +78,17 @@ function QuiscoProvider({children} : QuiscoProps){
                 setProgreso('1/6')
                 break
         }
-        
     },[router])
 
+    useEffect(()=>{
+        console.log(orden);
+    },[orden])
+
+    function eliminarAlerta(): void{
+        setTimeout(() => {
+            setAlerta({mensaje: '', tipo: ''})    
+        }, 3000);
+    }
     async function getCategorias(){   
         setCargando(true)     
         try {
@@ -114,7 +127,11 @@ function QuiscoProvider({children} : QuiscoProps){
         }
         setCargando(false)
     }
-    function agregarProductoPedido(): void{
+    function agregarProductoPedido(producto: {}): void{
+        if(producto.cantidad === 0){
+            setAlerta({mensaje: 'Cantidad no válida', tipo: 'error'});
+            return 
+        }
         const ordenCopia = orden;
         const productosCopia = orden.pedido;
         const productoRepetido = productosCopia.find(productoState => productoState.id === producto.id)
@@ -122,11 +139,12 @@ function QuiscoProvider({children} : QuiscoProps){
             const productosFiltrado = productosCopia.map( productoState => productoState.id === producto.id ? producto : productoState)
             ordenCopia.pedido = productosFiltrado
             setOrden(ordenCopia)
-            return; 
+            return
         }
         productosCopia.push(producto);
         ordenCopia.pedido = productosCopia
         setOrden(ordenCopia)
+        
     }
     function eliminarProducto(id: number): void{
         const copiaOrden = orden
@@ -137,6 +155,7 @@ function QuiscoProvider({children} : QuiscoProps){
 
     function esconderModal(){
         setVerModal(!verModal)
+        setCantidad(0)
     }
 
     function aumentarCantidad(){
@@ -176,7 +195,8 @@ function QuiscoProvider({children} : QuiscoProps){
                 setCargando,
                 progreso,
                 eliminarProducto,
-                agregarProductoPedido
+                agregarProductoPedido,
+                eliminarAlerta
             }}
         >
             {children}
