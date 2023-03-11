@@ -5,8 +5,8 @@ import useQuiosco from '../../hooks/useQuiosco'
 import { useRouter } from 'next/router'
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({categoriasData}) {
-  const {categorias, setCategorias} = useQuiosco()
+export default function Home() {
+  // const {categorias, setCategorias} = useQuiosco()
   const router = useRouter();
   
   useEffect(()=>{

@@ -39,7 +39,7 @@ function QuiscoProvider({children} : QuiscoProps){
     const [productos, setProductos] = useState<Producto[]>([])
     const [producto, setProducto] = useState<Producto>({nombre: '', precio: 0, imagen: '', categoriaId: 0, cantidad: 0})
     const [productoBuscar, setProductoBuscar] = useState<number>(0)
-    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(0)
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(1)
     const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({nombre: '', productos: []})
     const [verModal, setVerModal] = useState<boolean>(false)
     const [cantidad, setCantidad] = useState<number>(0)
