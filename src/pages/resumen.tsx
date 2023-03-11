@@ -10,7 +10,7 @@ function resumen() {
         title={'Resumen'}
         description='Visualiza el progreso del pedido que haz realizado'
     >
-        <h1 className='font-black text-4xl my-4'>Resumen</h1>
+        <h1 className='font-black text-4xl my-4'>Resumen de tu Pedido</h1>
         <p>{orden?.pedido.length ? 'Revisa, administra y edita los productos agregados a tu pedido' : 'No haz agregado productos a tu orden, comienza agregandolos'}</p>
         <div className='w-2/3'></div>
         <div className='flex flex-col gap-4 mt-5 justify-center'>
