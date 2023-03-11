@@ -132,8 +132,8 @@ function QuiscoProvider({children} : QuiscoProps){
             setAlerta({mensaje: 'Cantidad no válida', tipo: 'error'})
             return 
         }
-        const ordenCopia = orden
-        const productosCopia = orden.pedido
+        const ordenCopia: TOrden = orden
+        const productosCopia:Producto[] = orden.pedido
         const productoRepetido = productosCopia.find((productoState: Producto) => productoState.id === producto.id)
         if(productoRepetido){
             const productosFiltrado = productosCopia.map( (productoState: Producto) => productoState.id === producto.id ? producto : productoState)
