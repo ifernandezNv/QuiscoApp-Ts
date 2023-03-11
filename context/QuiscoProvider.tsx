@@ -49,6 +49,7 @@ function QuiscoProvider({children} : QuiscoProps){
     const [orden, setOrden] = useState<TOrden>({pedido: [], fecha: new Date(), total: 0, nombre: ''})
     const [ordenes, setOrdenes] = useState<TOrden[]>([])
     const [alerta, setAlerta] = useState<TAlerta>({mensaje: '', tipo: ''})
+    const [total, setTotal] = useState<number>(0)
 
     const router = useRouter()
 
@@ -133,9 +134,9 @@ function QuiscoProvider({children} : QuiscoProps){
         }
         const ordenCopia = orden
         const productosCopia = orden.pedido
-        const productoRepetido = productosCopia.find(productoState => productoState.id === producto.id)
+        const productoRepetido = productosCopia.find((productoState: Producto) => productoState.id === producto.id)
         if(productoRepetido){
-            const productosFiltrado = productosCopia.map( productoState => productoState.id === producto.id ? producto : productoState)
+            const productosFiltrado = productosCopia.map( (productoState: Producto) => productoState.id === producto.id ? producto : productoState)
             ordenCopia.pedido = productosFiltrado
             setOrden(ordenCopia)
             setAlerta({mensaje: 'Producto editado correctamente', tipo: 'success'})
@@ -155,10 +156,15 @@ function QuiscoProvider({children} : QuiscoProps){
 
     function eliminarProducto(id: number): void{
         const copiaOrden = orden
-        const productosFiltrados = orden.pedido.filter(producto => producto.id !== id)
+        const productosFiltrados = orden.pedido.filter((producto: Producto) => producto.id !== id)
         copiaOrden.pedido = productosFiltrados
         setProductos(productosFiltrados)
         setOrden(copiaOrden)
+    }
+
+    function calcularTotal():void{
+        const sumaTotal = orden.pedido.reduce((total: number, producto: Producto) => Number(total) + Number(producto.cantidad || 0 * producto.precio), 0)
+        setTotal(sumaTotal)
     }
 
     function eliminarAlerta(): void{
