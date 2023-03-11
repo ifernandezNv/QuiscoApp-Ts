@@ -1,9 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import { formatearDinero, formatearFecha } from 'helpers/index'
+import useQuiosco from 'hooks/useQuiosco'
 function ProductoCarrito({producto}) {
     const {nombre, precio, cantidad, id, imagen, fecha} = producto
-    
+    const {eliminarProducto, esconderModalConfirmacion} = useQuiosco()
   return (
     <div className='flex gap-5 my-3 w-5/6 items-center justify-between bg-white rounded shadow border-b p-5'>
       <div className='flex items-center gap-3'>
@@ -22,7 +23,7 @@ function ProductoCarrito({producto}) {
       </div>
         <div className='flex flex-col gap-2'>
             <button type='button' className='bg-amber-500 hover:bg-amber-600 p-2 my-3 text-center text-white font-semibold rounded transition-all'>Editar</button>
-            <button type='button' className='bg-red-600 hover:bg-red-800 p-2 my-3 text-center text-white font-semibold rounded transition-all'>Eliminar</button>
+            <button onClick={()=>esconderModalConfirmacion(id)} type='button' className='bg-red-600 hover:bg-red-800 p-2 my-3 text-center text-white font-semibold rounded transition-all'>Eliminar</button>
         </div>
     </div>
   )

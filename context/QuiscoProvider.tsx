@@ -42,6 +42,7 @@ function QuiscoProvider({children} : QuiscoProps){
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(1)
     const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({nombre: '', productos: []})
     const [verModal, setVerModal] = useState<boolean>(false)
+    const [verModalConfirmacion, setVerModalConfirmacion] = useState<boolean>(false)
     const [cantidad, setCantidad] = useState<number>(0)
     const [cargando, setCargando] = useState<boolean>(false)
     const [progreso, setProgreso] = useState<string>(InitialValue)
@@ -162,12 +163,18 @@ function QuiscoProvider({children} : QuiscoProps){
         const copiaOrden = orden
         const productosFiltrados = orden.pedido.filter(producto => producto.id !== id)
         copiaOrden.pedido = productosFiltrados
+        setProductos(productosFiltrados)
         setOrden(copiaOrden)
     }
 
     function esconderModal(): void{
         setVerModal(!verModal)
         setCantidad(0)
+        setAlerta({mensaje: '', tipo: ''})
+    }
+    
+    function esconderModalConfirmacion(id: number):void{
+        setVerModalConfirmacion(!verModalConfirmacion)   
     }
 
     function aumentarCantidad(): void{
@@ -217,6 +224,8 @@ function QuiscoProvider({children} : QuiscoProps){
                 categoriaInfo,
                 verModal,
                 esconderModal,
+                verModalConfirmacion,
+                esconderModalConfirmacion,
                 cantidad,
                 aumentarCantidad,
                 disminuirCantidad,
