@@ -167,14 +167,18 @@ function QuiscoProvider({children} : QuiscoProps){
         setOrden(copiaOrden)
     }
 
+    function mostrarModal():void{
+        setVerModal(true)
+    }
+
     function esconderModal(): void{
-        setVerModal(!verModal)
+        setVerModal(false)
         setCantidad(0)
         setAlerta({mensaje: '', tipo: ''})
     }
     
     function esconderModalConfirmacion(id: number):void{
-        setVerModalConfirmacion(!verModalConfirmacion)   
+        setVerModalConfirmacion(!verModalConfirmacion)  
     }
 
     function aumentarCantidad(): void{
@@ -224,6 +228,7 @@ function QuiscoProvider({children} : QuiscoProps){
                 categoriaInfo,
                 verModal,
                 esconderModal,
+                mostrarModal,
                 verModalConfirmacion,
                 esconderModalConfirmacion,
                 cantidad,

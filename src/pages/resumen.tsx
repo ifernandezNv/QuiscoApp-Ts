@@ -16,7 +16,7 @@ function resumen() {
         <div className='w-2/3'></div>
         {verModalConfirmacion && <ModalConfirmacion/>}
         <div className='flex flex-col gap-4 mt-5 justify-center'>
-          {orden?.pedido.map(productoState => <ProductoCarrito key={productoState.id} producto={productoState}/> )}
+          {orden?.pedido.map(productoState => <ProductoCarrito key={productoState.id} productoState={productoState}/> )}
         </div>
     </Layout>
   )

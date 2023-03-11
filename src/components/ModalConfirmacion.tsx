@@ -8,10 +8,13 @@ function ModalConfirmacion() {
           <div className='flex justify-end'>
             <button type='button' onClick={() => esconderModalConfirmacion()} className='flex justify-end font-bold text-xl -mt-3 py-1 px-3 cursor-pointer'>&times;</button>
           </div>
-            <div className='flex gap-3 items-center p-4'>
+            <div className='flex flex-col gap-3 items-center p-4'>
                 <p>¿Estás seguro de eliminar este producto?</p>
-                <button onClick={()=>eliminarProducto(0)} type='button'>Sí, eliminar</button>
-                <button onClick={()=>esconderModalConfirmacion()} type='button'>Cancelar</button>
+                <div className='flex gap-5 flex-between'>
+                  <button onClick={()=>esconderModalConfirmacion()} type='button' className='rounded text-center text-white font-semibold uppercase p-2 bg-amber-500 hover:bg-amber-700 transition-all'>Cancelar</button>
+                  <button onClick={()=>eliminarProducto()} type='button' className='rounded text-center text-white font-semibold uppercase p-2 bg-red-500 hover:bg-red-700 transition-all'>Sí, eliminar</button>
+                </div>
+                
             </div>
         </div>
     </div>
