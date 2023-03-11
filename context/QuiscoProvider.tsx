@@ -76,12 +76,6 @@ function QuiscoProvider({children} : QuiscoProps){
         }
     },[router.pathname])
 
-    function eliminarAlerta(): void{
-        setTimeout(() => {
-            setAlerta({mensaje: '', tipo: ''})    
-        }, 3000)
-    }
-
     async function getCategorias(){   
         setCargando(true)     
         try {
@@ -144,7 +138,7 @@ function QuiscoProvider({children} : QuiscoProps){
             const productosFiltrado = productosCopia.map( productoState => productoState.id === producto.id ? producto : productoState)
             ordenCopia.pedido = productosFiltrado
             setOrden(ordenCopia)
-            setAlerta({mensaje: 'Producto agregado correctamente', tipo: 'success'})
+            setAlerta({mensaje: 'Producto editado correctamente', tipo: 'success'})
             setTimeout(() => {
                 esconderModal()
             }, 2000)
@@ -167,6 +161,12 @@ function QuiscoProvider({children} : QuiscoProps){
         setOrden(copiaOrden)
     }
 
+    function eliminarAlerta(): void{
+        setTimeout(() => {
+            setAlerta({mensaje: '', tipo: ''})    
+        }, 3000)
+    }
+
     function mostrarModal():void{
         setVerModal(true)
     }
@@ -177,8 +177,11 @@ function QuiscoProvider({children} : QuiscoProps){
         setAlerta({mensaje: '', tipo: ''})
     }
     
-    function esconderModalConfirmacion(id: number):void{
-        setVerModalConfirmacion(!verModalConfirmacion)  
+    function mostrarModalConfirmacion(id: number):void{
+        setVerModalConfirmacion(true)
+    }
+    function esconderModalConfirmacion():void{
+        setVerModalConfirmacion(false)  
     }
 
     function aumentarCantidad(): void{
@@ -231,7 +234,9 @@ function QuiscoProvider({children} : QuiscoProps){
                 mostrarModal,
                 verModalConfirmacion,
                 esconderModalConfirmacion,
+                mostrarModalConfirmacion,
                 cantidad,
+                setCantidad,
                 aumentarCantidad,
                 disminuirCantidad,
                 cargando, 

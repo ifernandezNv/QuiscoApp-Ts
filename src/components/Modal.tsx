@@ -4,7 +4,12 @@ import Image from 'next/image'
 import {formatearDinero} from 'helpers/index.ts'
 import Alerta from './Alerta'
 function Modal() {
-    const {esconderModal, producto, cantidad, aumentarCantidad, disminuirCantidad, cargando, agregarProductoPedido, alerta} = useQuiosco()
+    const {esconderModal, producto, cantidad, setCantidad, aumentarCantidad, disminuirCantidad, cargando, agregarProductoPedido, alerta} = useQuiosco()
+    useEffect(()=>{
+      if(producto?.cantidad){
+        setCantidad(producto.cantidad)
+      }
+    },[])
   return (
     <div className='block fixed z-index-1 left-0 top-0 w-full h-screen bg-black bg-opacity-50'>
         <div className='fixed left-1/3 top-1/4 bg-white rounded shadow p-3 w-2/5'>
@@ -34,7 +39,7 @@ function Modal() {
                     </div>
                     <button type='button' className='w-full text-center font-semibold text-white bg-indigo-700 hover:bg-indigo-900 py-2 rounded'
                       onClick={()=>agregarProductoPedido({...producto, cantidad})}
-                      >Agregar al Pedido
+                      >{producto?.cantidad ? 'Guardar Cambios' : 'Agregar al Pedido'}
                     </button>                  
                   </div>
                 </div>
