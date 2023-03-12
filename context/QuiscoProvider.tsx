@@ -128,6 +128,33 @@ function QuiscoProvider({children} : QuiscoProps){
         setCargando(false)
     }
 
+    async function guardarOrden(){
+        calcularTotal()
+        setOrden({...orden, nombre})
+        if(nombre === ''){
+            setAlerta({mensaje: 'El campo Nombre es obligatorio', tipo: 'error'})
+            return
+        }
+        if(orden.pedido.length === 0){
+            setAlerta({mensaje: 'El pedido no puede estar vacío', tipo: 'error'})
+            return
+        }
+        console.log(orden, total, nombre);
+        
+        try {
+            const consulta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orden`, {
+                method: 'POST',
+                body: JSON.stringify(orden)
+            })
+            console.log(consulta);
+            
+            const respuesta = await consulta.json()
+            console.log(respuesta)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     function agregarProductoPedido(producto: {}): void{
         if(producto.cantidad === 0){
             setAlerta({mensaje: 'Cantidad no válida', tipo: 'error'})
@@ -169,9 +196,18 @@ function QuiscoProvider({children} : QuiscoProps){
         eliminarAlerta()
     }
 
-    function calcularTotal():void{
-        const sumaTotal = orden.pedido.reduce((total: number, producto: Producto) => Number(total) + Number(producto.cantidad || 0 * producto.precio), 0)
-        setTotal(sumaTotal)
+    async function calcularTotal(){
+        const sumaTotal = orden.pedido.reduce((total: number, producto: Producto) => Number(total) + (producto.cantidad * producto.precio), 0)
+        setTotal(Number(sumaTotal))
+        console.log(total);
+        console.log(sumaTotal);
+        setTimeout(() => {
+            setOrden({...orden, total: sumaTotal})    
+            console.log(orden);
+        }, 1000);
+        
+
+        
     }
 
     function eliminarAlerta(): void{
@@ -263,7 +299,8 @@ function QuiscoProvider({children} : QuiscoProps){
                 total,
                 setTotal,
                 nombre,
-                setNombre
+                setNombre,
+                guardarOrden
             }}
         >
             {children}
