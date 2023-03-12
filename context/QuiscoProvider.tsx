@@ -159,7 +159,13 @@ function QuiscoProvider({children} : QuiscoProps){
         const productosFiltrados = orden.pedido.filter((producto: Producto) => producto.id !== id)
         copiaOrden.pedido = productosFiltrados
         setProductos(productosFiltrados)
+        setAlerta({mensaje: 'Producto eliminado correctamente', tipo: 'success'})
         setOrden(copiaOrden)
+        setTimeout(() => {
+            esconderModalConfirmacion()    
+        }, 2000);
+        
+        eliminarAlerta()
     }
 
     function calcularTotal():void{
@@ -170,7 +176,7 @@ function QuiscoProvider({children} : QuiscoProps){
     function eliminarAlerta(): void{
         setTimeout(() => {
             setAlerta({mensaje: '', tipo: ''})    
-        }, 3000)
+        }, 2000)
     }
 
     function mostrarModal():void{
@@ -183,7 +189,7 @@ function QuiscoProvider({children} : QuiscoProps){
         setAlerta({mensaje: '', tipo: ''})
     }
     
-    function mostrarModalConfirmacion(id: number):void{
+    function mostrarModalConfirmacion():void{
         setVerModalConfirmacion(true)
     }
     function esconderModalConfirmacion():void{

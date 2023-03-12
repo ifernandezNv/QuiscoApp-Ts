@@ -28,7 +28,10 @@ function ProductoCarrito({productoState}) {
               mostrarModal()
               setProducto(productoState)
             }} type='button' className='flex gap-2 items-center bg-amber-500 hover:bg-amber-600 p-2 my-3 text-center text-white font-semibold rounded transition-all'><Icon icon="ph:pencil-simple" color="white" width="20" height="20" />Editar</button>
-            <button onClick={()=>mostrarModalConfirmacion(id)} type='button' className='flex gap-2 items-center bg-red-600 hover:bg-red-800 p-2 my-3 text-center text-white font-semibold rounded transition-all'><Icon icon="mdi:trash-can-outline" color="white" width="20" height="20" />Eliminar</button>
+            <button onClick={()=>{
+              mostrarModalConfirmacion()
+              setProducto(productoState)
+            }} type='button' className='flex gap-2 items-center bg-red-600 hover:bg-red-800 p-2 my-3 text-center text-white font-semibold rounded transition-all'><Icon icon="mdi:trash-can-outline" color="white" width="20" height="20" />Eliminar</button>
         </div>
     </div>
   )
