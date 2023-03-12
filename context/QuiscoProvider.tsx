@@ -129,7 +129,6 @@ function QuiscoProvider({children} : QuiscoProps){
     }
 
     async function guardarOrden(){
-        setOrden({...orden, nombre})
         if(nombre === ''){
             setAlerta({mensaje: 'El campo Nombre es obligatorio', tipo: 'error'})
             return
@@ -138,17 +137,19 @@ function QuiscoProvider({children} : QuiscoProps){
             setAlerta({mensaje: 'El pedido no puede estar vacío', tipo: 'error'})
             return
         }
-        console.log(orden, nombre);
-        
         try {
+            setTimeout(() => {
+                setOrden({...orden, nombre})
+            }, 1000);
             const consulta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orden`, {
                 method: 'POST',
                 body: JSON.stringify(orden)
             })
-            console.log(consulta);
-            
-            const respuesta = await consulta.json()
-            console.log(respuesta)
+            setAlerta({mensaje: 'Orden creada correctamente', tipo: 'success'})
+            setTimeout(() => {
+                setNombre('')
+                router.push('/cafe')
+            }, 3000);
         } catch (error) {
             console.log(error)
         }
@@ -266,6 +267,7 @@ function QuiscoProvider({children} : QuiscoProps){
                 setCategoriaSeleccionada,
                 ordenes,
                 orden,
+                setOrden,
                 getCategorias,
                 getInfoCategoria,
                 getInfoProducto,

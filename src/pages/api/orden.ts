@@ -14,10 +14,9 @@ const prisma = new PrismaClient();
 
 export default async function handler( req: NextApiRequest, res: NextApiResponse<TOrden>) {
     const ordenDatos: TOrden = req.body
-    console.log(req.body)
-    // const orden = await prisma.orden.create({
-    //     data: ordenDatos
-    // });
-    // res.status(200).json(orden)
+    const orden = await prisma.orden.create({
+        data: JSON.parse(ordenDatos)
+    });
+    res.status(200).json(orden)
     desconectarPrisma(prisma)
 }

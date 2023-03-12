@@ -3,7 +3,7 @@ import Layout from '@/components/Layout'
 import useQuiosco from 'hooks/useQuiosco'
 import Alerta from '@/components/Alerta'
 function datos() {
-  const {nombre, setNombre, guardarOrden, alerta} = useQuiosco()
+  const {nombre, setNombre, guardarOrden, alerta, orden, setOrden} = useQuiosco()
   return (
     <Layout
         title={'Datos y Total del pedido'}
@@ -14,7 +14,10 @@ function datos() {
         {alerta.mensaje && <Alerta/>}
         <p>Inserta tu nombre:</p>
         <input type="text" placeholder='Tu nombre' value={nombre} onChange={(e)=> setNombre(e.target.value)} />
-        <button type='button' onClick={()=>guardarOrden()} className={`${nombre !=='' && nombre.length > 3 ? 'bg-indigo-700 hover:bg-indigo-900 transition-all' : 'bg-indigo-400 cursor-not-allowed' } block rounded p-2 my-2 text-center text-white font-semibold`}>Registrar Pedido</button>
+        <button type='button' onClick={()=>{
+          setOrden({...orden, nombre})
+          guardarOrden()
+        }} className={`${nombre !=='' && nombre.length > 3 ? 'bg-indigo-700 hover:bg-indigo-900 transition-all' : 'bg-indigo-400 cursor-not-allowed' } block rounded p-2 my-2 text-center text-white font-semibold`}>Registrar Pedido</button>
     </Layout>
   )
 }
