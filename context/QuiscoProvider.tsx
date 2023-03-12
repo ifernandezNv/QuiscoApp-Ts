@@ -257,7 +257,10 @@ function QuiscoProvider({children} : QuiscoProps){
                 eliminarProducto,
                 agregarProductoPedido,
                 alerta,
-                eliminarAlerta
+                eliminarAlerta,
+                calcularTotal,
+                total,
+                setTotal
             }}
         >
             {children}
