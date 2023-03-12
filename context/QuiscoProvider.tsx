@@ -138,7 +138,7 @@ function QuiscoProvider({children} : QuiscoProps){
             setAlerta({mensaje: 'El pedido no puede estar vacío', tipo: 'error'})
             return
         }
-        console.log(orden, total, nombre);
+        console.log(orden, nombre);
         
         try {
             const consulta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orden`, {
@@ -198,15 +198,9 @@ function QuiscoProvider({children} : QuiscoProps){
     async function calcularTotal(){
         const sumaTotal = orden.pedido.reduce((total: number, producto: Producto) => Number(total) + (producto.cantidad * producto.precio), 0)
         setTotal(Number(sumaTotal))
-        console.log(total);
-        console.log(sumaTotal);
         setTimeout(() => {
-            setOrden({...orden, total: sumaTotal})    
-            console.log(orden);
+            setOrden({...orden, total: sumaTotal})
         }, 1000);
-        
-
-        
     }
 
     function eliminarAlerta(): void{
