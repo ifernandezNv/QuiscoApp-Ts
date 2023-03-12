@@ -6,7 +6,7 @@ import ModalConfirmacion from '@/components/ModalConfirmacion'
 import Modal from '@/components/Modal'
 import { useRouter } from 'next/router'
 function resumen() {
-  const {orden, verModalConfirmacion, verModal} = useQuiosco()
+  const {orden, verModalConfirmacion, verModal, calcularTotal} = useQuiosco()
   const router = useRouter()
   return (
     <Layout
@@ -17,7 +17,10 @@ function resumen() {
         {orden?.pedido.length ? (
           <>
             <p className='border-b py-2'>Revisa, administra y edita los productos agregados a tu pedido</p>
-            <button onClick={()=>router.push('/datos')} className='p-2 text-white text-center font-semibold rounded bg-indigo-700 hover:bg-indigo-900 transition-all mt-2'>Confrmar Pedido</button>
+            <button onClick={()=>{
+              router.push('/datos')
+              calcularTotal()
+            }} className='p-2 text-white text-center font-semibold rounded bg-indigo-700 hover:bg-indigo-900 transition-all mt-2'>Confrmar Pedido</button>
             <div className='w-2/3'></div>
             {verModalConfirmacion && <ModalConfirmacion/>}
             {verModal && <Modal/>}

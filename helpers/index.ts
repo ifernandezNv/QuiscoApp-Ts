@@ -11,3 +11,11 @@ export function formatearFecha(fecha: Date): string{
         day: '2-digit'
     })
 }
+
+export async function desconectarPrisma(prisma: unknown ){
+    try {
+        await prisma.$disconnect()
+    } catch (error) {
+        console.error(error)   
+    }
+}

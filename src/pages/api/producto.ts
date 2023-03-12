@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {Producto} from 'prisma/data/productos';
+import { desconectarPrisma } from 'helpers';
 const prisma = new PrismaClient();
 
 export default async function handler( req: NextApiRequest, res: NextApiResponse<Producto[]>) {
@@ -10,4 +11,5 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     });
     
     res.status(200).json(productoQuery)
+    desconectarPrisma(prisma)
 }

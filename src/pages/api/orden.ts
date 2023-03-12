@@ -1,5 +1,7 @@
+import {useEffect} from 'react'
 import { PrismaClient } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { desconectarPrisma } from 'helpers'
 interface TOrden {
     id: number
     pedido: unknown
@@ -9,6 +11,7 @@ interface TOrden {
 }
 const prisma = new PrismaClient();
 
+
 export default async function handler( req: NextApiRequest, res: NextApiResponse<TOrden>) {
     const ordenDatos: TOrden = req.body
     console.log(req.body)
@@ -16,4 +19,5 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     //     data: ordenDatos
     // });
     // res.status(200).json(orden)
+    desconectarPrisma(prisma)
 }

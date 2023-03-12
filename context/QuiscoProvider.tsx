@@ -129,7 +129,6 @@ function QuiscoProvider({children} : QuiscoProps){
     }
 
     async function guardarOrden(){
-        calcularTotal()
         setOrden({...orden, nombre})
         if(nombre === ''){
             setAlerta({mensaje: 'El campo Nombre es obligatorio', tipo: 'error'})
