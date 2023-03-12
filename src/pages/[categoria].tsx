@@ -21,8 +21,8 @@ function Categoria() {
           <div className='w-1/6 hidden'></div>
           <h1 className='font-bold text-4xl my-2'>{categoriaInfo?.nombre}</h1>
           <p>Comienza seleccionando los productos que deseas</p>
-          <p>Espera un momento y disfruta tu comida</p>
-          <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4 my-5'>
+          <p className='border-b py-2'>Espera un momento y disfruta tu comida</p>
+          <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4 my-3'>
             {productos?.map(producto => <Producto key={producto.id} producto={producto}/>)}
           </div>
           {verModal && 

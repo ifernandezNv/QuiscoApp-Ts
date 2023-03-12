@@ -16,7 +16,7 @@ function resumen() {
         <h1 className='font-black text-4xl my-4'>Resumen de tu Pedido</h1>
         {orden?.pedido.length ? (
           <>
-            <p>Revisa, administra y edita los productos agregados a tu pedido</p>
+            <p className='border-b py-2'>Revisa, administra y edita los productos agregados a tu pedido</p>
             <button onClick={()=>router.push('/datos')} className='p-2 text-white text-center font-semibold rounded bg-indigo-700 hover:bg-indigo-900 transition-all mt-2'>Confrmar Pedido</button>
             <div className='w-2/3'></div>
             {verModalConfirmacion && <ModalConfirmacion/>}
@@ -26,7 +26,7 @@ function resumen() {
             </div> 
           </>
         ): 
-        <p>No haz agregado productos a tu orden, comienza agregandolos</p>
+        <p className='border-b py-2'>No haz agregado productos a tu orden, comienza agregandolos</p>
         }
     </Layout>
   )

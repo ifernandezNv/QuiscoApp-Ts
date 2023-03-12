@@ -50,7 +50,7 @@ function QuiscoProvider({children} : QuiscoProps){
     const [ordenes, setOrdenes] = useState<TOrden[]>([])
     const [alerta, setAlerta] = useState<TAlerta>({mensaje: '', tipo: ''})
     const [total, setTotal] = useState<number>(0)
-
+    const [nombre, setNombre] = useState<string>('')
     const router = useRouter()
 
     useEffect(()=>{
@@ -101,6 +101,7 @@ function QuiscoProvider({children} : QuiscoProps){
         }
         setCargando(false)
     }
+
     async function getInfoCategoria(){
         setCargando(true)
         try {
@@ -260,7 +261,9 @@ function QuiscoProvider({children} : QuiscoProps){
                 eliminarAlerta,
                 calcularTotal,
                 total,
-                setTotal
+                setTotal,
+                nombre,
+                setNombre
             }}
         >
             {children}

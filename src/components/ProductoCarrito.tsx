@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { formatearDinero, formatearFecha } from 'helpers/index'
+import { formatearDinero } from 'helpers/index'
 import useQuiosco from 'hooks/useQuiosco'
 import { Icon } from '@iconify/react'
 
