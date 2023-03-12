@@ -37,7 +37,7 @@ function QuiscoProvider({children} : QuiscoProps){
     
     const [categorias, setCategorias] = useState<Categoria[]>([])
     const [productos, setProductos] = useState<Producto[]>([])
-    const [producto, setProducto] = useState<Producto>({nombre: '', precio: 0, imagen: '', categoriaId: 0, cantidad: 0})
+    const [producto, setProducto] = useState<Producto>({id: 0, nombre: '', precio: 0, imagen: '', categoriaId: 0, cantidad: 0})
     const [productoBuscar, setProductoBuscar] = useState<number>(0)
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(1)
     const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({nombre: '', productos: []})
