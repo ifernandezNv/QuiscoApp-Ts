@@ -19,7 +19,8 @@ function ProductoCarrito({productoState}) {
         />
         <div className=''>
           <h3 className='font-bold text-xl'>{nombre}</h3>
-          <p>Cantidad: <span className='font-black text-lg text-amber-500'>{cantidad}</span></p>
+          <p className='font-semibold'>Cantidad: {cantidad}</p>
+          <p className='font-black text-xl text-amber-500'>Precio: {formatearDinero(precio)}</p>
           <p>Subtotal: {formatearDinero(Number(precio) * Number(cantidad))}</p>
         </div>
       </div>
