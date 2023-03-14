@@ -83,7 +83,6 @@ function QuiscoProvider({children} : QuiscoProps){
           const categoriasQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categorias`)
           const categoriasData = await categoriasQuery.json()
           setCategorias(categoriasData)
-          router.push('/cafe')
         } catch (error) {
           console.log(error)
         }
