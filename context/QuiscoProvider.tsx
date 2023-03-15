@@ -1,7 +1,6 @@
 import {createContext, useState, useEffect, ReactNode} from 'react'
-import { Producto } from 'prisma/data/productos'
-import { Categoria } from 'prisma/data/categorias'
 import { useRouter } from 'next/router'
+import { TAlerta, TCategoria, TOrden, TProducto } from 'helpers/types'
 /*
     Porcentajes de la barra de progreso
     Menu = 16.6667% (w-1/6)
@@ -12,32 +11,15 @@ interface QuiscoProps{
     children: ReactNode
 }
 
-interface TCategoria {
-    id?: number
-    nombre: string
-    productos: Producto[]
-}
-
-interface TOrden {
-    id?: number
-    pedido: unknown
-    fecha: Date
-    total: number
-    nombre: string
-}
-interface TAlerta {
-    mensaje: string
-    tipo: string
-}
 const InitialValue : '1/6' | '2/3' | 'full' = '1/6'
 
 const QuiscoContext = createContext({})
 
 function QuiscoProvider({children} : QuiscoProps){
     
-    const [categorias, setCategorias] = useState<Categoria[]>([])
-    const [productos, setProductos] = useState<Producto[]>([])
-    const [producto, setProducto] = useState<Producto>({id: 0, nombre: '', precio: 0, imagen: '', categoriaId: 0, cantidad: 0})
+    const [categorias, setCategorias] = useState<TCategoria[]>([])
+    const [productos, setProductos] = useState<TProducto[]>([])
+    const [producto, setProducto] = useState<TProducto>({id: 0, nombre: '', precio: 0, imagen: '', categoriaId: 0, cantidad: 0})
     const [productoBuscar, setProductoBuscar] = useState<number>(0)
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(1)
     const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({nombre: '', productos: []})
@@ -160,10 +142,10 @@ function QuiscoProvider({children} : QuiscoProps){
             return 
         }
         const ordenCopia: TOrden = orden
-        const productosCopia:Producto[] = orden.pedido
-        const productoRepetido = productosCopia.find((productoState: Producto) => productoState.id === producto.id)
+        const productosCopia:TProducto[] = orden.pedido
+        const productoRepetido = productosCopia.find((productoState: TProducto) => productoState.id === producto.id)
         if(productoRepetido){
-            const productosFiltrado = productosCopia.map( (productoState: Producto) => productoState.id === producto.id ? producto : productoState)
+            const productosFiltrado = productosCopia.map( (productoState: TProducto) => productoState.id === producto.id ? producto : productoState)
             ordenCopia.pedido = productosFiltrado
             setOrden(ordenCopia)
             setAlerta({mensaje: 'Producto editado correctamente', tipo: 'success'})
@@ -183,7 +165,7 @@ function QuiscoProvider({children} : QuiscoProps){
 
     function eliminarProducto(id: number): void{
         const copiaOrden = orden
-        const productosFiltrados = orden.pedido.filter((producto: Producto) => producto.id !== id)
+        const productosFiltrados = orden.pedido.filter((producto: TProducto) => producto.id !== id)
         copiaOrden.pedido = productosFiltrados
         setProductos(productosFiltrados)
         setAlerta({mensaje: 'Producto eliminado correctamente', tipo: 'success'})
@@ -196,7 +178,7 @@ function QuiscoProvider({children} : QuiscoProps){
     }
 
     async function calcularTotal(){
-        const sumaTotal = orden.pedido.reduce((total: number, producto: Producto) => Number(total) + (producto.cantidad * producto.precio), 0)
+        const sumaTotal = orden.pedido.reduce((total: number, producto: TProducto) => Number(total) + (producto.cantidad * producto.precio), 0)
         setTotal(Number(sumaTotal))
         setTimeout(() => {
             setOrden({...orden, total: sumaTotal})

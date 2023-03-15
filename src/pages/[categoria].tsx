@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react'
 import Layout from '@/components/Layout'
-import { useRouter } from 'next/router'
 import useQuiosco from 'hooks/useQuiosco'
 import Producto from '@/components/Producto'
 import Modal from '@/components/Modal'
 function Categoria() {
     const {categoriaInfo, productos, getCategorias, verModal, cargando} = useQuiosco()
-    const router = useRouter()
     useEffect(()=>{
       getCategorias()
     },[])
