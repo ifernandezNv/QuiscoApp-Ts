@@ -3,7 +3,7 @@ import AdminLayout from '@/components/AdminLayout'
 import Orden from '@/components/Orden'
 import { TOrden } from 'helpers/types'
 function Admin() {
-    const {ordenes} = useQuiosco()
+    const {ordenes}: TOrden[] = useQuiosco()
   return (
     <AdminLayout>
         <h1 className='font-black text-4xl my-4 capitalize'>Administrar órdenes recibidas</h1>

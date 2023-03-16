@@ -136,6 +136,19 @@ function QuiscoProvider({children} : QuiscoProps){
         }
     }
 
+    async function completarOrden(id: number){
+        try {
+            const consulta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orden-completada`, {
+                method: 'POST',
+                body: JSON.stringify(id)
+            })
+            const resultado = await consulta.json()
+            console.log(id);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     function agregarProductoPedido(producto: {}): void{
         if(producto.cantidad === 0){
             setAlerta({mensaje: 'Cantidad no válida', tipo: 'error'})
@@ -276,7 +289,8 @@ function QuiscoProvider({children} : QuiscoProps){
                 setTotal,
                 nombre,
                 setNombre,
-                guardarOrden
+                guardarOrden,
+                completarOrden
             }}
         >
             {children}
