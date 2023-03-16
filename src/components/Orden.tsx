@@ -16,7 +16,7 @@ function Orden({ordenState}) {
         </div>
         <div className='flex justify-between items-center'>
           <p className='text-4xl text-amber-500 font-bold'>Total a pagar: {formatearDinero(total)}</p>
-          <button onClick={()=>completarOrden(id)} className='bg-indigo-700 hover:bg-indigo-900 transition-all p-2 rounded text-white text-center uppercase font-semibold'>Completar Orden</button>
+          <button onClick={()=>completarOrden({...ordenState, completado: true})} className='bg-indigo-700 hover:bg-indigo-900 transition-all p-2 rounded text-white text-center uppercase font-semibold'>Completar Orden</button>
         </div>
         
     </div>

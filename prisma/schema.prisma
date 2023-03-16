@@ -25,4 +25,5 @@ model Orden {
     fecha String
     total Float
     nombre String
+    completado Boolean
 }

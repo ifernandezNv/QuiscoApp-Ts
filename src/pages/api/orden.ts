@@ -1,14 +1,7 @@
-import {useEffect} from 'react'
 import { PrismaClient } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { desconectarPrisma } from 'helpers'
-interface TOrden {
-    id: number
-    pedido: unknown
-    fecha: string
-    total: number
-    nombre: string
-}
+import { TOrden } from 'helpers/types'
 const prisma = new PrismaClient();
 
 

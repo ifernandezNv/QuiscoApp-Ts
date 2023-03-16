@@ -19,7 +19,7 @@ function QuiscoProvider({children} : QuiscoProps){
     
     const [categorias, setCategorias] = useState<TCategoria[]>([])
     const [productos, setProductos] = useState<TProducto[]>([])
-    const [producto, setProducto] = useState<TProducto>({id: 0, nombre: '', precio: 0, imagen: '', categoriaId: 0, cantidad: 0})
+    const [producto, setProducto] = useState<TProducto>({id: 0, nombre: '', precio: 0, imagen: '', categoriaId: '0', cantidad: 0})
     const [productoBuscar, setProductoBuscar] = useState<number>(0)
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(1)
     const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({nombre: '', productos: []})
@@ -28,7 +28,7 @@ function QuiscoProvider({children} : QuiscoProps){
     const [cantidad, setCantidad] = useState<number>(0)
     const [cargando, setCargando] = useState<boolean>(false)
     const [progreso, setProgreso] = useState<string>(InitialValue)
-    const [orden, setOrden] = useState<TOrden>({pedido: [], fecha: new Date(), total: 0, nombre: ''})
+    const [orden, setOrden] = useState<TOrden>({pedido: [], fecha: new Date(), total: 0, nombre: '', completado: false})
     const [ordenes, setOrdenes] = useState<TOrden[]>([])
     const [alerta, setAlerta] = useState<TAlerta>({mensaje: '', tipo: ''})
     const [total, setTotal] = useState<number>(0)
@@ -40,7 +40,6 @@ function QuiscoProvider({children} : QuiscoProps){
             getInfoCategoria()
         }
     },[categoriaSeleccionada])
-
     useEffect(()=>{
         getInfoProducto()
     },[productoBuscar])
@@ -119,9 +118,6 @@ function QuiscoProvider({children} : QuiscoProps){
             return
         }
         try {
-            setTimeout(() => {
-                setOrden({...orden, nombre})
-            }, 1000);
             const consulta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orden`, {
                 method: 'POST',
                 body: JSON.stringify(orden)
@@ -136,14 +132,14 @@ function QuiscoProvider({children} : QuiscoProps){
         }
     }
 
-    async function completarOrden(id: number){
+    async function completarOrden(orden: TOrden){
         try {
-            const consulta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orden-completada`, {
+            const consulta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/completada`, {
                 method: 'POST',
-                body: JSON.stringify(id)
+                body: JSON.stringify(orden)
             })
             const resultado = await consulta.json()
-            console.log(id);
+            setAlerta({mensaje: resultado.msg, tipo: 'success'})
         } catch (error) {
             console.log(error);
         }

@@ -18,6 +18,7 @@ export interface TOrden {
     fecha: Date
     total: number
     nombre: string
+    completado: boolean
 }
 export interface TAlerta {
     mensaje: string
