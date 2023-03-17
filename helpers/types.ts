@@ -14,7 +14,7 @@ export interface TCategoria {
 
 export interface TOrden {
     id?: number
-    pedido: unknown | []
+    pedido: []
     fecha: Date
     total: number
     nombre: string
