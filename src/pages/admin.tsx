@@ -7,7 +7,7 @@ import Alerta from '@/components/Alerta'
 import useSWR from 'swr'
 
 function Admin() {
-    const {ordenes, setOrdenes}: TOrden[] = useQuiosco()
+    const {ordenes, setOrdenes} = useQuiosco()
     const {alerta}: TAlerta = useQuiosco()
     const fetcher = ()=> fetch(`/api/ordenes`).then(datos => datos.json())
     const {data, error, isLoading} = useSWR(`/api/ordenes`, fetcher, {
