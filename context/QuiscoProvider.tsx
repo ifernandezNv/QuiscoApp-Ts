@@ -39,8 +39,33 @@ function QuiscoProvider({children} : QuiscoProps){
         if(categoriaSeleccionada != 0){
             getInfoCategoria()
         }
+        async function getInfoCategoria(){
+            setCargando(true)
+            try {
+              const categoriaQuery = await fetch(`/api/categoria?id=${Number(categoriaSeleccionada)}`)
+              const categoriaData = await categoriaQuery.json()
+              setCategoriaInfo(categoriaData[0])          
+              setProductos(categoriaData[0].productos)
+            } catch (error) {
+              console.log(error)
+            }
+            setCargando(false)
+        }
     },[categoriaSeleccionada])
+
     useEffect(()=>{
+        async function getInfoProducto(){
+            setCargando(true)
+            try {
+                const productoQuery = await fetch(`/api/producto?id=${Number(productoBuscar)}`)
+                const productoData = await productoQuery.json()
+                setProducto(productoData[0])
+            } catch (error) {
+                console.log(error)
+                
+            }
+            setCargando(false)
+        }
         getInfoProducto()
     },[productoBuscar])
     
@@ -48,15 +73,11 @@ function QuiscoProvider({children} : QuiscoProps){
         getCategorias()
     },[])
 
-    // useEffect(()=>{
-    //     getOrdenes()
-    // },[])
-
     useEffect(()=>{
         if(router?.pathname){
             mostrarProgreso()
         }
-    },[router.pathname])
+    },)
 
     async function getCategorias(){   
         setCargando(true)     
@@ -80,33 +101,7 @@ function QuiscoProvider({children} : QuiscoProps){
           console.log(error)
         }
         setCargando(false)
-    }
-
-    async function getInfoCategoria(){
-        setCargando(true)
-        try {
-          const categoriaQuery = await fetch(`/api/categoria?id=${Number(categoriaSeleccionada)}`)
-          const categoriaData = await categoriaQuery.json()
-          setCategoriaInfo(categoriaData[0])          
-          setProductos(categoriaData[0].productos)
-        } catch (error) {
-          console.log(error)
-        }
-        setCargando(false)
-    }
-    
-    async function getInfoProducto(){
-        setCargando(true)
-        try {
-            const productoQuery = await fetch(`/api/producto?id=${Number(productoBuscar)}`)
-            const productoData = await productoQuery.json()
-            setProducto(productoData[0])
-        } catch (error) {
-            console.log(error)
-            
-        }
-        setCargando(false)
-    }
+    }    
 
     async function guardarOrden(){
         if(nombre === ''){
