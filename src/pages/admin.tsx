@@ -18,8 +18,8 @@ function Admin() {
     })
   return (
     <AdminLayout>
-        <h1 className='font-black text-4xl my-4 capitalize'>Administrar órdenes recibidas</h1>
-        <p className='border-b pb-2'>Marca como completadas las órdenes que hayan sido finalizadas por Cocina</p>
+        <h1 className='font-black text-4xl my-4 capitalize'>Administrar ordenes recibidas</h1>
+        <p className='border-b pb-2'>Marca como completadas las ordenes que hayan sido finalizadas por Cocina</p>
         <div className='flex flex-col gap-4 mt-4'>
           {alerta.mensaje !== '' && <Alerta/>}
           {ordenes?.length > 0 ? 
