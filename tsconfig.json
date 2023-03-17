@@ -21,6 +21,7 @@
     }
   },
   "rules": {
+    "react-hooks/rules-of-hooks": "warn",
     "react-hooks/exhaustive-deps": "warn", 
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
