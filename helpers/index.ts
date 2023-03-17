@@ -1,3 +1,5 @@
+import { PrismaClient } from "@prisma/client"
+type Prisma = PrismaClient
 export function formatearDinero(dinero: number = 0): string{
     return dinero.toLocaleString('en-US', {
         style: 'currency',
@@ -12,7 +14,7 @@ export function formatearFecha(fecha: Date): string{
     })
 }
 
-export async function desconectarPrisma(prisma){
+export async function desconectarPrisma(prisma: Prisma){
     try {
         await prisma.$disconnect()
     } catch (error) {
