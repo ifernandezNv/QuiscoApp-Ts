@@ -1,11 +1,11 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { QuiscoProvider } from 'context/QuiscoProvider'
+import { QuioscoProvider } from 'context/QuioscoProvider'
 
 export default function App({ Component, pageProps }: AppProps) {
   return(
-    <QuiscoProvider>
+    <QuioscoProvider>
       <Component {...pageProps} />
-    </QuiscoProvider>
+    </QuioscoProvider>
   )
 }

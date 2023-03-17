@@ -7,15 +7,15 @@ import { TAlerta, TCategoria, TOrden, TProducto } from 'helpers/types'
     Resumen: 66.6667% (w-4/6)
     Datos y Total: 100% (w-full)
 */
-interface QuiscoProps{
+interface QuioscoProps{
     children: ReactNode
 }
 
 const InitialValue : '1/6' | '2/3' | 'full' = '1/6'
 
-const QuiscoContext = createContext({})
+const QuioscoContext = createContext({})
 
-function QuiscoProvider({children} : QuiscoProps){
+function QuioscoProvider({children} : QuioscoProps){
     
     const [categorias, setCategorias] = useState<TCategoria[]>([])
     const [productos, setProductos] = useState<TProducto[]>([])
@@ -238,7 +238,7 @@ function QuiscoProvider({children} : QuiscoProps){
     }
 
     return (
-        <QuiscoContext.Provider 
+        <QuioscoContext.Provider 
             value={{
                 productos,
                 setProductos,
@@ -286,10 +286,10 @@ function QuiscoProvider({children} : QuiscoProps){
             }}
         >
             {children}
-        </QuiscoContext.Provider>
+        </QuioscoContext.Provider>
     )
 }
 export {
-    QuiscoProvider
+    QuioscoProvider
 }
-export default QuiscoContext
+export default QuioscoContext
