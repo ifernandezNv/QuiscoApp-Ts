@@ -48,9 +48,9 @@ function QuiscoProvider({children} : QuiscoProps){
         getCategorias()
     },[])
 
-    useEffect(()=>{
-        getOrdenes()
-    },[])
+    // useEffect(()=>{
+    //     getOrdenes()
+    // },[])
 
     useEffect(()=>{
         if(router?.pathname){
@@ -61,7 +61,7 @@ function QuiscoProvider({children} : QuiscoProps){
     async function getCategorias(){   
         setCargando(true)     
         try {
-          const categoriasQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categorias`)
+          const categoriasQuery = await fetch(`/api/categorias`)
           const categoriasData = await categoriasQuery.json()
           setCategorias(categoriasData)
         } catch (error) {
@@ -73,7 +73,7 @@ function QuiscoProvider({children} : QuiscoProps){
     async function getOrdenes(){   
         setCargando(true)     
         try {
-          const ordenesQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ordenes`)
+          const ordenesQuery = await fetch(`/api/ordenes`)
           const ordenesData = await ordenesQuery.json()
           setOrdenes(ordenesData)
         } catch (error) {
@@ -85,7 +85,7 @@ function QuiscoProvider({children} : QuiscoProps){
     async function getInfoCategoria(){
         setCargando(true)
         try {
-          const categoriaQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categoria?id=${Number(categoriaSeleccionada)}`)
+          const categoriaQuery = await fetch(`/api/categoria?id=${Number(categoriaSeleccionada)}`)
           const categoriaData = await categoriaQuery.json()
           setCategoriaInfo(categoriaData[0])          
           setProductos(categoriaData[0].productos)
@@ -98,7 +98,7 @@ function QuiscoProvider({children} : QuiscoProps){
     async function getInfoProducto(){
         setCargando(true)
         try {
-            const productoQuery = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/producto?id=${Number(productoBuscar)}`)
+            const productoQuery = await fetch(`/api/producto?id=${Number(productoBuscar)}`)
             const productoData = await productoQuery.json()
             setProducto(productoData[0])
         } catch (error) {
@@ -118,7 +118,7 @@ function QuiscoProvider({children} : QuiscoProps){
             return
         }
         try {
-            const consulta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orden`, {
+            const consulta = await fetch(`/api/orden`, {
                 method: 'POST',
                 body: JSON.stringify(orden)
             })
@@ -134,7 +134,7 @@ function QuiscoProvider({children} : QuiscoProps){
 
     async function completarOrden(orden: TOrden){
         try {
-            const consulta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/completada`, {
+            const consulta = await fetch(`/api/completada`, {
                 method: 'POST',
                 body: JSON.stringify(orden)
             })
@@ -256,6 +256,7 @@ function QuiscoProvider({children} : QuiscoProps){
                 categoriaSeleccionada,
                 setCategoriaSeleccionada,
                 ordenes,
+                setOrdenes,
                 orden,
                 setOrden,
                 getCategorias,
