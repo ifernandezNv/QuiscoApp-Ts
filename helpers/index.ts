@@ -12,7 +12,7 @@ export function formatearFecha(fecha: Date): string{
     })
 }
 
-export async function desconectarPrisma(prisma: unknown ){
+export async function desconectarPrisma(prisma){
     try {
         await prisma.$disconnect()
     } catch (error) {
