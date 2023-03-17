@@ -5,9 +5,10 @@ import Producto from '@/components/Producto'
 import Modal from '@/components/Modal'
 function Categoria() {
     const {categoriaInfo, productos, getCategorias, verModal, cargando} = useQuiosco()
+    
     useEffect(()=>{
       getCategorias()
-    },[])
+    })
 
   return (
     <Layout

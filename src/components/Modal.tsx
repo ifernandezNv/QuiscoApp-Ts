@@ -9,7 +9,7 @@ function Modal() {
       if(producto?.cantidad){
         setCantidad(producto.cantidad)
       }
-    },[])
+    })
   return (
     <div className='block fixed z-index-1 left-0 top-0 w-full h-screen bg-black bg-opacity-50'>
         <div className='fixed left-1/3 top-1/4 bg-white rounded shadow p-3 w-2/5'>
