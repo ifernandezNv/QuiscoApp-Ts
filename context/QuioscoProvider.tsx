@@ -108,7 +108,7 @@ function QuioscoProvider({children} : QuioscoProps){
             setAlerta({mensaje: 'El campo Nombre es obligatorio', tipo: 'error'})
             return
         }
-        if(orden.pedido.length === 0){
+        if(orden?.pedido?.length === 0){
             setAlerta({mensaje: 'El pedido no puede estar vacío', tipo: 'error'})
             return
         }
