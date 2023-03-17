@@ -1,9 +1,10 @@
-import React from 'react'
+/* eslint-disable react-hooks/rules-of-hooks */
+import useQuiosco from 'hooks/useQuiosco'
 import Layout from '@/components/Layout'
 import Alerta from '@/components/Alerta'
 import { formatearDinero } from 'helpers'
-import useQuiosco from 'hooks/useQuiosco'
 function datos() {
+
   const {nombre, setNombre, guardarOrden, alerta, orden, setOrden, total} = useQuiosco()
   return (
     <Layout
