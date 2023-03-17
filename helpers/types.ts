@@ -3,18 +3,17 @@ export interface TProducto{
     nombre: string
     precio: number
     imagen: string
-    categoriaId?: string
-    cantidad?: number
+    categoriaId: string
+    cantidad: number
 }
 export interface TCategoria {
-    id?: number
     nombre: string
     productos: TProducto[]
 }
 
 export interface TOrden {
     id?: number
-    pedido: []
+    pedido: TProducto[]
     fecha: Date
     total: number
     nombre: string

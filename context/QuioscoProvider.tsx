@@ -140,7 +140,7 @@ function QuioscoProvider({children} : QuioscoProps){
         }
     }
 
-    function agregarProductoPedido(producto: {}): void{
+    function agregarProductoPedido(producto: TProducto): void{
         if(producto.cantidad === 0){
             setAlerta({mensaje: 'Cantidad no válida', tipo: 'error'})
             return 
@@ -149,7 +149,7 @@ function QuioscoProvider({children} : QuioscoProps){
         const productosCopia:TProducto[] = orden.pedido
         const productoRepetido = productosCopia.find((productoState: TProducto) => productoState.id === producto.id)
         if(productoRepetido){
-            const productosFiltrado = productosCopia.map( (productoState: TProducto) => productoState.id === producto.id ? producto : productoState)
+            const productosFiltrado: TProducto[] = productosCopia.map( (productoState: TProducto) => productoState.id === producto.id ? producto : productoState)
             ordenCopia.pedido = productosFiltrado
             setOrden(ordenCopia)
             setAlerta({mensaje: 'Producto editado correctamente', tipo: 'success'})
@@ -168,8 +168,8 @@ function QuioscoProvider({children} : QuioscoProps){
     }
 
     function eliminarProducto(id: number): void{
-        const copiaOrden = orden
-        const productosFiltrados = orden.pedido.filter((producto: TProducto) => producto.id !== id)
+        const copiaOrden: TOrden = orden
+        const productosFiltrados: TProducto[] = orden.pedido.filter((producto: TProducto) => producto.id !== id)
         copiaOrden.pedido = productosFiltrados
         setProductos(productosFiltrados)
         setAlerta({mensaje: 'Producto eliminado correctamente', tipo: 'success'})
