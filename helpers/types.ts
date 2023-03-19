@@ -7,6 +7,7 @@ export interface TProducto{
     cantidad: number
 }
 export interface TCategoria {
+    id: number
     nombre: string
     productos: TProducto[]
 }

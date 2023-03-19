@@ -8,6 +8,8 @@ function Categoria() {
     
     useEffect(()=>{
       getCategorias()
+      // console.log(cargando);
+      
     })
 
   return (
@@ -15,7 +17,7 @@ function Categoria() {
         title={`Menú ${categoriaInfo?.nombre}`}
         description={`Selecciona los productos de la categoria ${categoriaInfo?.nombre}, selecciona la cantidad deseada y disfruta tu comida`}
     >
-      {cargando ? 'Cargando...' : (
+      {/* {!cargando ? 'Cargando...' : ( */}
         <>
           <div className='w-1/6 hidden'></div>
           <h1 className='font-bold text-4xl my-2'>{categoriaInfo?.nombre}</h1>
@@ -29,7 +31,7 @@ function Categoria() {
             />
           }
         </>
-      )}
+      {/* )} */}
     </Layout>
   )
 }

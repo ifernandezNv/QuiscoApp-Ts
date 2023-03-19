@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { TProducto } from 'helpers/types'
 function ProductoOrden({productoState})  {
     const {imagen, nombre, cantidad} = productoState
   return (

@@ -1,4 +1,4 @@
-import {createContext, useState, useEffect, ReactNode} from 'react'
+import {createContext, useContext, useState, useEffect, ReactNode} from 'react'
 import { useRouter } from 'next/router'
 import { TAlerta, TCategoria, TOrden, TProducto } from 'helpers/types'
 /*
@@ -22,7 +22,7 @@ function QuioscoProvider({children} : QuioscoProps){
     const [producto, setProducto] = useState<TProducto>({id: 0, nombre: '', precio: 0, imagen: '', categoriaId: '0', cantidad: 0})
     const [productoBuscar, setProductoBuscar] = useState<number>(0)
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number>(1)
-    const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({nombre: '', productos: []})
+    const [categoriaInfo, setCategoriaInfo] = useState<TCategoria>({id:0, nombre: '', productos: []})
     const [verModal, setVerModal] = useState<boolean>(false)
     const [verModalConfirmacion, setVerModalConfirmacion] = useState<boolean>(false)
     const [cantidad, setCantidad] = useState<number>(0)
@@ -36,42 +36,39 @@ function QuioscoProvider({children} : QuioscoProps){
     const router = useRouter()
 
     useEffect(()=>{
-        if(categoriaSeleccionada != 0){
-            getInfoCategoria()
-        }
+        getInfoCategoria()
         async function getInfoCategoria(){
-            setCargando(true)
             try {
-              const categoriaQuery = await fetch(`/api/categoria?id=${Number(categoriaSeleccionada)}`)
+                setCargando(true)
+              const categoriaQuery = await fetch(`/api/categoria/${Number(categoriaSeleccionada)}`)
               const categoriaData = await categoriaQuery.json()
-              setCategoriaInfo(categoriaData[0])          
+              setCategoriaInfo(categoriaData[0])
               setProductos(categoriaData[0].productos)
+              setCargando(false)
             } catch (error) {
               console.log(error)
             }
-            setCargando(false)
         }
     },[categoriaSeleccionada])
 
     useEffect(()=>{
         async function getInfoProducto(){
-            setCargando(true)
             try {
-                const productoQuery = await fetch(`/api/producto?id=${Number(productoBuscar)}`)
+                const productoQuery = await fetch(`/api/producto/${Number(productoBuscar)}`)
                 const productoData = await productoQuery.json()
                 setProducto(productoData[0])
+                setCargando(true)
+                setCargando(false)
             } catch (error) {
                 console.log(error)
-                
             }
-            setCargando(false)
         }
         getInfoProducto()
     },[productoBuscar])
     
     useEffect(()=>{
-        getCategorias()
-    },[])
+        getCategorias()  
+    })
 
     useEffect(()=>{
         if(router?.pathname){
@@ -80,15 +77,16 @@ function QuioscoProvider({children} : QuioscoProps){
     },)
 
     async function getCategorias(){   
-        setCargando(true)     
         try {
+            setCargando(true)
           const categoriasQuery = await fetch(`/api/categorias`)
           const categoriasData = await categoriasQuery.json()
           setCategorias(categoriasData)
+          setCargando(false)
         } catch (error) {
           console.log(error)
         }
-        setCargando(false)
+        
     }
 
     async function getOrdenes(){   
@@ -255,8 +253,6 @@ function QuioscoProvider({children} : QuioscoProps){
                 orden,
                 setOrden,
                 getCategorias,
-                // getInfoCategoria,
-                // getInfoProducto,
                 getOrdenes,
                 categoriaInfo,
                 verModal,
