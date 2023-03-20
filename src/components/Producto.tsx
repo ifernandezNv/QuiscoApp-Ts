@@ -14,8 +14,8 @@ function Producto({producto}) {
             alt={`Ìmagen producto ${nombre}`}
         />
         <div className='p-4'>
-            <h3 className='text-xl font-bold'>{nombre}</h3>
-            <p className='text-amber-500 font-black text-4xl'>{formatearDinero(precio)}</p>
+            <h3 className='text-xl font-bold' data-cy='hamburguesa'>{nombre}</h3>
+            <p className='text-amber-500 font-black text-4xl' data-cy='precio'>{formatearDinero(precio)}</p>
             <button type='submit' onClick={()=> {
               mostrarModal()
               setProductoBuscar(id)
