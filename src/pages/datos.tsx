@@ -22,7 +22,7 @@ function datos() {
         <p className='text-xl font-bold my-2'>Total: {formatearDinero(total)}</p>
         <button type='button' onClick={()=>{
           guardarOrden()
-        }} className={`${nombre !=='' && nombre.length > 3 ? 'bg-indigo-700 hover:bg-indigo-900 transition-all' : 'bg-indigo-400 cursor-not-allowed' } block rounded p-2 my-2 text-center text-white font-semibold`}>Confirmar Pedido</button>
+        }} className={`${nombre !=='' && nombre.length > 3 && orden.pedido.length > 0 ? 'bg-indigo-700 hover:bg-indigo-900 transition-all' : 'bg-indigo-400 cursor-not-allowed disabled' } block rounded p-2 my-2 text-center text-white font-semibold`}>Confirmar Pedido</button>
     </Layout>
   )
 }

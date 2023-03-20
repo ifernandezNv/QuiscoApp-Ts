@@ -4,7 +4,7 @@ import Image from 'next/image'
 import {formatearDinero} from 'helpers/index'
 import Alerta from './Alerta'
 function Modal() {
-    const {esconderModal, producto, cantidad, setCantidad, aumentarCantidad, disminuirCantidad, cargando, agregarProductoPedido, alerta} = useQuiosco()
+    const {esconderModal, producto, cantidad, setCantidad, aumentarCantidad, disminuirCantidad, cargando, setCargando, agregarProductoPedido, alerta} = useQuiosco()
     useEffect(()=>{
       if(producto?.cantidad){
         setCantidad(producto.cantidad)

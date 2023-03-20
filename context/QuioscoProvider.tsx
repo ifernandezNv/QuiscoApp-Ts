@@ -1,4 +1,4 @@
-import {createContext, useContext, useState, useEffect, ReactNode} from 'react'
+import {createContext, useState, useEffect, ReactNode, SetStateAction, Dispatch} from 'react'
 import { useRouter } from 'next/router'
 import { TAlerta, TCategoria, TOrden, TProducto } from 'helpers/types'
 /*
@@ -38,37 +38,45 @@ function QuioscoProvider({children} : QuioscoProps){
     useEffect(()=>{
         getInfoCategoria()
         async function getInfoCategoria(){
+            setCargando(true)
             try {
-                setCargando(true)
               const categoriaQuery = await fetch(`/api/categoria/${Number(categoriaSeleccionada)}`)
               const categoriaData = await categoriaQuery.json()
               setCategoriaInfo(categoriaData[0])
               setProductos(categoriaData[0].productos)
-              setCargando(false)
             } catch (error) {
               console.log(error)
+            }
+            finally{
+                setCargando(false)
             }
         }
     },[categoriaSeleccionada])
 
     useEffect(()=>{
+        
         async function getInfoProducto(){
+            setCargando(true)
             try {
                 const productoQuery = await fetch(`/api/producto/${Number(productoBuscar)}`)
                 const productoData = await productoQuery.json()
                 setProducto(productoData[0])
-                setCargando(true)
-                setCargando(false)
             } catch (error) {
                 console.log(error)
             }
+            finally{
+                setCargando(false)
+            }
+            
         }
         getInfoProducto()
     },[productoBuscar])
     
     useEffect(()=>{
-        getCategorias()  
-    })
+        if(!categorias.length){
+            getCategorias() 
+        }
+    },[categorias])
 
     useEffect(()=>{
         if(router?.pathname){
@@ -77,16 +85,17 @@ function QuioscoProvider({children} : QuioscoProps){
     },)
 
     async function getCategorias(){   
+        setCargando(true)
         try {
-            setCargando(true)
           const categoriasQuery = await fetch(`/api/categorias`)
           const categoriasData = await categoriasQuery.json()
           setCategorias(categoriasData)
-          setCargando(false)
         } catch (error) {
           console.log(error)
         }
-        
+        finally{
+            setCargando(false)
+        }
     }
 
     async function getOrdenes(){   
@@ -102,13 +111,8 @@ function QuioscoProvider({children} : QuioscoProps){
     }    
 
     async function guardarOrden(){
-        if(nombre === ''){
-            setAlerta({mensaje: 'El campo Nombre es obligatorio', tipo: 'error'})
-            return
-        }
-        if(orden?.pedido?.length === 0){
-            setAlerta({mensaje: 'El pedido no puede estar vacío', tipo: 'error'})
-            return
+        if(nombre === '' || orden?.pedido.length === 0){
+            return;
         }
         try {
             const consulta = await fetch(`/api/orden`, {
@@ -179,7 +183,7 @@ function QuioscoProvider({children} : QuioscoProps){
         eliminarAlerta()
     }
 
-    async function calcularTotal(){
+    function calcularTotal(){
         const sumaTotal = orden.pedido.reduce((total: number, producto: TProducto) => Number(total) + (producto.cantidad * producto.precio), 0)
         setTotal(Number(sumaTotal))
         setTimeout(() => {

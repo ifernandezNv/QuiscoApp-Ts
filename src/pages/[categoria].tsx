@@ -1,16 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
+import QuioscoContext from 'context/QuioscoProvider'
 import Layout from '@/components/Layout'
 import useQuiosco from 'hooks/useQuiosco'
 import Producto from '@/components/Producto'
 import Modal from '@/components/Modal'
+import { TProducto } from 'helpers/types'
 function Categoria() {
-    const {categoriaInfo, productos, getCategorias, verModal, cargando} = useQuiosco()
-    
-    useEffect(()=>{
-      getCategorias()
-      // console.log(cargando);
-      
-    })
+    const {categoriaInfo, productos, verModal} = useQuiosco()
 
   return (
     <Layout
@@ -24,7 +20,7 @@ function Categoria() {
           <p>Comienza seleccionando los productos que deseas</p>
           <p className='border-b py-2'>Espera un momento y disfruta tu comida</p>
           <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4 my-3'>
-            {productos?.map(producto => <Producto key={producto.id} producto={producto}/>)}
+            {productos?.map((producto: TProducto) => <Producto key={producto.id} producto={producto}/>)}
           </div>
           {verModal && 
             <Modal
