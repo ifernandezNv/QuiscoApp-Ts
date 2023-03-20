@@ -3,13 +3,17 @@ import useQuiosco from 'hooks/useQuiosco'
 import Image from 'next/image'
 import {formatearDinero} from 'helpers/index'
 import Alerta from './Alerta'
+import { TProducto } from 'helpers/types'
+let productoEncontrado: TProducto[] = []
 function Modal() {
-    const {esconderModal, producto, cantidad, setCantidad, aumentarCantidad, disminuirCantidad, cargando, setCargando, agregarProductoPedido, alerta} = useQuiosco()
+    const {esconderModal, producto, cantidad, setCantidad, aumentarCantidad, disminuirCantidad, cargando, orden, agregarProductoPedido, alerta} = useQuiosco()
     useEffect(()=>{
-      if(producto?.cantidad){
-        setCantidad(producto.cantidad)
+      const productoRepetido = orden.pedido.find((productoState: TProducto) => productoState.id === producto.id)
+      if(productoRepetido){
+        productoEncontrado = orden.pedido.filter(((productoState: TProducto) => productoState.id === producto.id))
+        setCantidad(productoEncontrado[0].cantidad)
       }
-    })
+    }, [])
   return (
     <div className='block fixed z-index-1 left-0 top-0 w-full h-screen bg-black bg-opacity-50'>
         <div className='fixed left-1/3 top-1/4 bg-white rounded shadow p-3 w-2/5'>
@@ -39,7 +43,7 @@ function Modal() {
                     </div>
                     <button type='button' className='w-full text-center font-semibold text-white bg-indigo-700 hover:bg-indigo-900 py-2 rounded'
                       onClick={()=>agregarProductoPedido({...producto, cantidad})}
-                      >{producto?.cantidad ? 'Guardar Cambios' : 'Agregar al Pedido'}
+                      >{productoEncontrado[0]?.cantidad ? 'Guardar Cambios' : 'Agregar al Pedido'}
                     </button>                  
                   </div>
                 </div>

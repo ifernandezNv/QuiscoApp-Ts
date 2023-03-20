@@ -84,7 +84,7 @@ function QuioscoProvider({children} : QuioscoProps){
         }
     },)
 
-    async function getCategorias(){   
+    async function getCategorias(){
         setCargando(true)
         try {
           const categoriasQuery = await fetch(`/api/categorias`)
