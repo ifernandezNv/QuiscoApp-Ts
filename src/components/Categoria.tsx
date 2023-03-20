@@ -15,7 +15,7 @@ function Categoria({categoria}) {
     }
 
   return (
-    <Link href={`/${icono}`} onClick={ () => cambiarCategoria(id)} 
+    <Link href={`/${icono}`} onClick={ () => cambiarCategoria(id)} data-cy={icono}
       className={`${router.asPath === `/${icono}` ? 'bg-yellow-500' : 'hover:bg-yellow-500 transition-all'} p-2 border-b rounded w-full flex gap-4 items-center justify-center my-2`} >
       <Image
         alt={`Imagen de la categoria ${nombre}`}
