@@ -10,10 +10,12 @@ import { TAlerta, TCategoria, TOrden, TProducto } from 'helpers/types'
 interface QuioscoProps{
     children: ReactNode
 }
-
+type TQuiosco = {
+    [key: string]: any;
+}
 const InitialValue : '1/6' | '2/3' | 'full' = '1/6'
 
-const QuioscoContext = createContext({})
+const QuioscoContext = createContext<TQuiosco>({})
 
 function QuioscoProvider({children} : QuioscoProps){
     
