@@ -3,7 +3,7 @@ import { TProducto } from 'helpers/types'
 import { formatearDinero, formatearFecha } from 'helpers'
 import ProductoOrden from './ProductoOrden'
 import useQuiosco from 'hooks/useQuiosco'
-function Orden({ordenState}: TProducto) {
+function Orden({ordenState}) {
     const {nombre, id, pedido, total, fecha} = ordenState
     const {completarOrden} = useQuiosco()
   return (

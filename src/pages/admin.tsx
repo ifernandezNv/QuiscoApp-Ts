@@ -7,8 +7,7 @@ import Alerta from '@/components/Alerta'
 import useSWR from 'swr'
 
 function Admin() {
-    const {ordenes, setOrdenes} = useQuiosco()
-    const {alerta}: TAlerta = useQuiosco()
+    const {ordenes, setOrdenes, alerta} = useQuiosco()
     const fetcher = ()=> fetch(`/api/ordenes`).then(datos => datos.json())
     const {data, error, isLoading} = useSWR(`/api/ordenes`, fetcher, {
       refreshInterval: 100 //Configuración que ejecuta la consulta de datos cada 100 ms
