@@ -7,8 +7,8 @@ function ProgressBar() {
     <div className='mb-4 sticky'>
       <div className='pt-2 pb-3 flex justify-between'>
           <Link href='/cafe' className='font-bold text-xl '>Menú</Link>
-          <Link href='/resumen' className='font-bold text-xl '>Resumen</Link>
-          <Link href='/datos' className='font-bold text-xl '>Datos y Total</Link>
+          <Link href='/resumen' data-cy='resumen' className='font-bold text-xl '>Resumen</Link>
+          <Link href='/datos' data-cy='datos' className='font-bold text-xl '>Datos y Total</Link>
       </div>
       <div className='absolute w-full'>
         <div className='p-1 rounded bg-gray-300'></div>
