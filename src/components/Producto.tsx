@@ -16,7 +16,7 @@ function Producto({producto}) {
         <div className='p-4'>
             <h3 className='text-xl font-bold' data-cy='hamburguesa'>{nombre}</h3>
             <p className='text-amber-500 font-black text-4xl' data-cy='precio'>{formatearDinero(precio)}</p>
-            <button type='submit' onClick={()=> {
+            <button data-cy={`botonAgregar`} type='submit' onClick={()=> {
               mostrarModal()
               setProductoBuscar(id)
             }} className='w-full bg-indigo-700 hover:bg-indigo-900 text-center text-white font-bold p-2 mt-5 rounded transition-all'>Añadir al Pedido</button>
