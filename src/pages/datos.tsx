@@ -10,7 +10,7 @@ function datos() {
         title={'Datos y Total del pedido'}
         description='Mira un desglose de tu pedido, el total del mismo y espera unos minutos para disfrutar tu pedido'
     >
-        <h1 className='font-black text-4xl my-4'>Total y Confirmar Pedido</h1>
+        <h1 data-cy='headingDatos' className='font-black text-4xl my-4'>Total y Confirmar Pedido</h1>
         <p className='border-b py-2'>Confirma tu pedido a continuación</p>
         {alerta.mensaje && <Alerta/>}
         <p>Ingresa tu nombre:</p>

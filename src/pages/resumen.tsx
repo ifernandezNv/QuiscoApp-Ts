@@ -14,7 +14,7 @@ function resumen() {
         title={'Resumen'}
         description='Visualiza el progreso del pedido que haz realizado'
     >
-        <h1 className='font-black text-4xl my-4'>Resumen de tu Pedido</h1>
+        <h1 data-cy='headingResumen' className='font-black text-4xl my-4'>Resumen de tu Pedido</h1>
         {orden?.pedido.length ? (
           <>
             <p className='border-b py-2'>Revisa, administra y edita los productos agregados a tu pedido</p>

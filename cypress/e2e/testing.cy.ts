@@ -8,8 +8,10 @@ describe('Test visitando la página, verificando el contenido del sidebar y la c
   })
   it('Filtrando los productos de la categoría Hamburguesas', ()=>{
     cy.visit('/')
-    cy.get('a[data-cy=hamburguesa]').should('have.text', 'Hamburguesas').click()
-    cy.get('a[data-cy=hamburguesa]').should('have.class', 'bg-yellow-500')
+    
+    cy.get('a[data-cy=hamburguesa]').as('filtroHamburguesa').click()
+    cy.get('@filtroHamburguesa').should('have.class', 'bg-yellow-500')
+    
     cy.url().should('include', '/hamburguesa')
     cy.get('h1[data-cy=headingCategoria]').should('have.text', 'Hamburguesas')
     cy.get('h3[data-cy=hamburguesa]').should('contain.text', 'Hamburguesa Sencilla')
@@ -17,5 +19,13 @@ describe('Test visitando la página, verificando el contenido del sidebar y la c
   })
   it('Verificando la funcionalidad y el correcto redireccionamiento del progress bar', ()=>{
     cy.visit('/')
+    cy.get('a[data-cy=resumen]').click()
+    cy.url().should('include', '/resumen')
+    cy.get('div[data-cy=progreso]').should('have.class', 'w-2/3')
+    cy.get('h1[data-cy=headingResumen]').should('have.text', 'Resumen de tu Pedido')
+    cy.get('a[data-cy=datos]').click()
+    cy.url().should('include', '/datos')
+    cy.get('div[data-cy=progreso]').should('have.class', 'w-full')
+    cy.get('h1[data-cy=headingDatos]').should('have.text', 'Total y Confirmar Pedido')
   })
 })

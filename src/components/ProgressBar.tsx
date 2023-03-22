@@ -12,7 +12,7 @@ function ProgressBar() {
       </div>
       <div className='absolute w-full'>
         <div className='p-1 rounded bg-gray-300'></div>
-        <div className={`p-1 rounded w-${progreso} bg-amber-500 absolute left-0 top-0 transition-all`}></div>
+        <div data-cy='progreso' className={`p-1 rounded w-${progreso} bg-amber-500 absolute left-0 top-0 transition-all`}></div>
       </div>
       
     </div>
