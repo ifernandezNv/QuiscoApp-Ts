@@ -6,6 +6,7 @@ import ProductoCarrito from '@/components/ProductoCarrito'
 import ModalConfirmacion from '@/components/ModalConfirmacion'
 import Modal from '@/components/Modal'
 import { useRouter } from 'next/router'
+import { TProducto } from 'helpers/types'
 function resumen() {
   const {orden, verModalConfirmacion, verModal, calcularTotal} = useQuiosco()
   const router = useRouter()
@@ -26,11 +27,11 @@ function resumen() {
             {verModalConfirmacion && <ModalConfirmacion/>}
             {verModal && <Modal/>}
             <div className='flex flex-col gap-4 mt-2 justify-center'>
-              {orden?.pedido.map(productoState => <ProductoCarrito key={productoState.id} productoState={productoState}/> )}
+              {orden?.pedido.map((productoState: TProducto) => <ProductoCarrito key={productoState.id} productoState={productoState}/> )}
             </div> 
           </>
         ): 
-        <p className='border-b py-2'>No haz agregado productos a tu orden, comienza agregandolos</p>
+        <p data-cy='noProductos' className='border-b py-2'>No haz agregado productos a tu orden, comienza agregandolos</p>
         }
     </Layout>
   )
