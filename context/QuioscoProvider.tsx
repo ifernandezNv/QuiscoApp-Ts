@@ -114,6 +114,7 @@ function QuioscoProvider({children} : QuioscoProps){
 
     async function guardarOrden(){
         if(nombre === '' || orden?.pedido.length === 0){
+            setAlerta({mensaje: 'Faltan datos', tipo: 'error'})
             return;
         }
         try {

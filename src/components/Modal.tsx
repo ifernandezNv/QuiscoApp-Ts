@@ -18,7 +18,7 @@ function Modal() {
     <div className='block fixed z-index-1 left-0 top-0 w-full h-screen bg-black bg-opacity-50'>
         <div className='fixed left-1/3 top-1/4 bg-white rounded shadow p-3 w-2/5'>
           <div className='flex justify-end'>
-            <button type='button' onClick={() => esconderModal()} className='flex justify-end font-bold text-xl -mt-3 py-1 px-3 cursor-pointer'>&times;</button>
+            <button data-cy='cerrarModal' type='button' onClick={() => esconderModal()} className='flex justify-end font-bold text-xl -mt-3 py-1 px-3 cursor-pointer'>&times;</button>
           </div>
             {cargando ? 'Cargando...' : (
               <>
@@ -39,9 +39,9 @@ function Modal() {
                     <div className='flex gap-2 my-2'>
                       <button type='button' className='text-xl' onClick={()=>disminuirCantidad()}>-</button>
                       <p className='font-semibold text-xl'>{cantidad}</p>
-                      <button type='button' className='text-xl' onClick={()=>aumentarCantidad()}>+</button>
+                      <button data-cy='aumentar' type='button' className='text-xl' onClick={()=>aumentarCantidad()}>+</button>
                     </div>
-                    <button type='button' className='w-full text-center font-semibold text-white bg-indigo-700 hover:bg-indigo-900 py-2 rounded'
+                    <button data-cy='agregarAlPedido' type='button' className='w-full text-center font-semibold text-white bg-indigo-700 hover:bg-indigo-900 py-2 rounded'
                       onClick={()=>agregarProductoPedido({...producto, cantidad})}
                       >{productoEncontrado[0]?.cantidad ? 'Guardar Cambios' : 'Agregar al Pedido'}
                     </button>                  

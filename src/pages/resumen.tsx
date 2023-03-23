@@ -18,7 +18,7 @@ function resumen() {
         {orden?.pedido.length ? (
           <>
             <p className='border-b py-2'>Revisa, administra y edita los productos agregados a tu pedido</p>
-            <button onClick={()=>{
+            <button data-cy='confirmarPedido' onClick={()=>{
               router.push('/datos')
               calcularTotal()
             }} className='p-2 text-white text-center font-semibold rounded bg-indigo-700 hover:bg-indigo-900 transition-all mt-2'>Confrmar Pedido</button>

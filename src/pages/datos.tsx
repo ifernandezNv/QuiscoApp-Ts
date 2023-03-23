@@ -14,13 +14,13 @@ function datos() {
         <p className='border-b py-2'>Confirma tu pedido a continuación</p>
         {alerta.mensaje && <Alerta/>}
         <p>Ingresa tu nombre:</p>
-        <input type="text" className='rounded bg-gray-200 p-2 w-1/4' placeholder='Tu nombre' value={nombre} onChange={(e)=> 
+        <input data-cy='nombre' type="text" className='rounded bg-gray-200 p-2 w-1/4' placeholder='Tu nombre' value={nombre} onChange={(e)=> 
         {
           setNombre(e.target.value)
           setOrden({...orden, nombre: e.target.value})
         }} />
         <p className='text-xl font-bold my-2'>Total: {formatearDinero(total)}</p>
-        <button type='button' onClick={()=>{
+        <button data-cy='confirmar' type='button' onClick={()=>{
           guardarOrden()
         }} className={`${nombre !=='' && nombre.length > 3 && orden.pedido.length > 0 ? 'bg-indigo-700 hover:bg-indigo-900 transition-all' : 'bg-indigo-400 cursor-not-allowed disabled' } block rounded p-2 my-2 text-center text-white font-semibold`}>Confirmar Pedido</button>
     </Layout>
