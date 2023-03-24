@@ -7,7 +7,7 @@ describe('Test visitando la página, verificando el contenido del sidebar y la c
     it('agregando un producto al pedido y verificando que se muestre en el resumen', ()=>{
         cy.visit('/')
         cy.get('button[data-cy=botonAgregar]').first().click()
-        cy.wait(100)
+        cy.wait(1000)
         cy.get('button[data-cy=aumentar]').click()
         cy.get('button[data-cy=agregarAlPedido]').click()
         cy.get('a[data-cy=resumen]').click()
@@ -16,6 +16,14 @@ describe('Test visitando la página, verificando el contenido del sidebar y la c
         cy.get('h3[data-cy=productoCarrito]').should('have.text', 'Café Caramel con Chocolate')
         cy.get('p[data-cy=cantidad]').first().should('have.text', 'Cantidad: 1')
         cy.get('p[data-cy=precio]').last().should('have.text', 'Precio: $59.90')
+        cy.get('button[data-cy=confirmarPedido]').should('exist') 
+        cy.get('button[data-cy=confirmarPedido]').click()
+        cy.url().should('include', '/resumen')
+        cy.get('input[data-cy=nombre]').type('Juan')
+        cy.get('button[data-cy=confirmar]').click()
+        cy.get('div[data-cy=alerta]').should('have.class', 'bg-green-600')
+        cy.get('p[data-cy=alertaMensaje]').should('have.text', 'Orden creada correctamente')
+
     })
     
 
