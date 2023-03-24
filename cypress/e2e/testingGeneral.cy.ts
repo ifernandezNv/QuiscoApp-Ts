@@ -8,14 +8,10 @@ describe('Test visitando la página, verificando el contenido del sidebar y la c
   })
   it('Filtrando los productos de la categoría Hamburguesas', ()=>{
     cy.visit('/')
-    
-  // cy.get('a[data-cy=Hamburguesas]').as('btn').click()
-  cy.get('[data-cy=Hamburguesas]').click()
-  // cy.get('@btn').should('have.class', 'bg-yellow-500')
-  // cy.url().should('include', '/hamburguesa')
-     cy.get('h1[data-cy=headingCategoria]').should('have.text', 'Hamburguesas')
-     cy.get('h3[data-cy=hamburguesa]').should('contain.text', 'Hamburguesa Sencilla')
-     cy.get('p[data-cy=precio]').should('contain.text', '$59.90')
+    cy.get('[data-cy=Hamburguesas]').click()
+    cy.get('h1[data-cy=headingCategoria]').should('have.text', 'Hamburguesas')
+    cy.get('h3[data-cy=hamburguesa]').should('contain.text', 'Hamburguesa Sencilla')
+    cy.get('p[data-cy=precio]').should('contain.text', '$59.90')
    })
    it('Verificando la funcionalidad y el correcto redireccionamiento del progress bar', ()=>{
      cy.visit('/')

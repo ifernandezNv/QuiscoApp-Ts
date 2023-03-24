@@ -17,11 +17,11 @@ function ProductoCarrito({productoState}) {
             src={`/assets/img/${imagen}.jpg`}
             className='rounded shadow-xl'
         />
-        <div className=''>
-          <h3 className='font-bold text-xl'>{nombre}</h3>
-          <p className='font-semibold'>Cantidad: {cantidad}</p>
-          <p className='font-black text-xl text-amber-500'>Precio: {formatearDinero(precio)}</p>
-          <p>Subtotal: {formatearDinero(Number(precio) * Number(cantidad))}</p>
+        <div>
+          <h3 data-cy='productoCarrito' className='font-bold text-xl'>{nombre}</h3>
+          <p data-cy='cantidad' className='font-semibold'>Cantidad: {cantidad}</p>
+          <p data-cy='precio' className='font-black text-xl text-amber-500'>Precio: {formatearDinero(precio)}</p>
+          <p >Subtotal: {formatearDinero(Number(precio) * Number(cantidad))}</p>
         </div>
       </div>
         <div className='flex flex-col gap-2'>
