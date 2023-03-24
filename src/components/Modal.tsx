@@ -37,8 +37,8 @@ function Modal() {
                     <p className='text-amber-500 font-black text-4xl my-1'>{formatearDinero(producto?.precio)}</p>
                     <p>Cantidad:</p>
                     <div className='flex gap-2 my-2'>
-                      <button type='button' className='text-xl' onClick={()=>disminuirCantidad()}>-</button>
-                      <p className='font-semibold text-xl'>{cantidad}</p>
+                      <button data-cy='disminuir' type='button' className='text-xl' onClick={()=>disminuirCantidad()}>-</button>
+                      <p data-cy='cantidad' className='font-semibold text-xl'>{cantidad}</p>
                       <button data-cy='aumentar' type='button' className='text-xl' onClick={()=>aumentarCantidad()}>+</button>
                     </div>
                     <button data-cy='agregarAlPedido' type='button' className='w-full text-center font-semibold text-white bg-indigo-700 hover:bg-indigo-900 py-2 rounded'
